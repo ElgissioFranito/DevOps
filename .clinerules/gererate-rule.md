@@ -54,10 +54,11 @@ Chaque leçon doit être écrite en Markdown et respecter EXACTEMENT cette struc
 - Adapte le niveau : accessible à un débutant motivé, mais pas simpliste
 - Ne saute jamais une section de la structure dans roadmap-devops.md
 - chaque dossier de leçon doit être autonome et complet, même si le sujet est abordé dans d’autres leçons e surtout doit avoir au moins 03 fichiers : 
-    - 01-leçon.md : contient la leçon complète, Objectifs d’apprentissage, Explication simple, Exemples concrets, Bonnes pratiques modernes (2025-2026), Pièges à éviter, Checklist de validation
+    - 01-lecon.md : contient la leçon complète, Objectifs d’apprentissage, Explication simple, Exemples concrets, Bonnes pratiques modernes (2025-2026), Pièges à éviter, Checklist de validation
     - 02-exercice.md : contient l’exercice pratique
     - 03-correction.md : contient la Correction détaillée de l’exercice, réécris la checklist de validation + conseils
     - si besoin des fichiers supplémentaires
+- ⚠️ **Convention de nommage** : écrire les fichiers sans accent . Les accents dans les noms de fichiers provoquent des problèmes techniques (chemins, scripts, Git). C'est valable aussi pour les noms de dossiers : éviter les noms contenant apostrophes et/ou accentuer.
 - les dossiers de leçon n'ont pas forcement le même gabarits, ça depend de la complexité et les nombres de sujets qu'il faut aborder.
 
 ## Comportement
