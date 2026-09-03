@@ -58,6 +58,7 @@ Chaque leçon doit être écrite en Markdown et respecter EXACTEMENT cette struc
     - 02-exercice.md : contient l’exercice pratique
     - 03-correction.md : contient la Correction détaillée de l’exercice, réécris la checklist de validation + conseils
     - si besoin des fichiers supplémentaires
+- les dossiers de leçon n'ont pas forcement le même gabarits, ça depend de la complexité et les nombres de sujets qu'il faut aborder.
 
 ## Comportement
 
