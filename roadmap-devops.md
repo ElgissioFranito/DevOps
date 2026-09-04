@@ -466,8 +466,6 @@ Liste des repositories
 
 Ensemble d'outils permettant d'utiliser plus facilement une API.
 
-#### REST
-
 **REST = REpresentational State Transfer.**
 
 C'est le style d'architecture le plus courant pour les API web (c'est ce que tu utilises déjà dans tes contrôleurs **Spring Boot** — en variante **NestJS** — sans forcément l'avoir nommé). Principes clés :
