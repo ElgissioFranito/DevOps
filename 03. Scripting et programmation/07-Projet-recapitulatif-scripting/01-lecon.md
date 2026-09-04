@@ -222,6 +222,12 @@ if __name__ == '__main__':
 
 ---
 
-> 📖 Prochaine étape : réalise le **projet** dans `02-exercice.md`, puis compare avec `03-correction.md`.
+🧭 **Bilan du bloc 3** — Tu sais maintenant **écrire des scripts Bash fiables et des scripts Python**, manipuler les **formats de données** (YAML/JSON), **automatiser des tâches système et des API**, et assembler le tout dans un **outil de diagnostic** réel (serveur, disque, service, logs, rapport) avec un code de sortie exploitable. C'est le socle d'un DevOps « qui automatise au lieu de tout faire à la main ».
+
+> 🎉 **Bloc 3 validé** si, sans notes, tu sais : écrire un script Bash avec `set -euo pipefail` + `trap`, un script Python avec `venv` + `requests`/JSON, et les associer dans un outil qui rend un rapport avec un code de sortie.
+
+---
+
+*Suite logique :* Bloc 04 — **Git — contrôle de version** (versionner ces scripts et tout ton code pour collaborer et revenir en arrière).
 
 > 💡 **Lien avec tes acquis** : c'est exactement ce que fera plus tard un système de monitoring (Prometheus, Grafana — bloc 12). Ici on le fait simplement, à la main, en script — avant de passer aux outils dédiés.

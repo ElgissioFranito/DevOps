@@ -1,7 +1,7 @@
 # Leçon 3 — Tests et environnements
 
 > **Bloc 1 · Bases du SDLC** — Leçon 3 sur 4
-> Tu sais maintenant comprendre le cycle de vie et organiser le travail dans un backlog. Cette leçon couvre une étape cruciale du cycle : **les tests** (pour vérifier) et **les environnements** (où l'on exécute l'application), ainsi que le **build** qui produit un livrable déployable.
+> 🧭 **Pont depuis la Leçon 2** : on a prévu *quoi* faire (le backlog) et *dans quel ordre* (les sprints). Cette leçon ajoute les **garde-fous** : **les tests** (pour vérifier que ça marche), **les environnements** (où l'on exécute l'application), et le **build** qui produit le livrable déployable.
 
 ---
 
@@ -79,6 +79,20 @@ src/...        ──►  npm run build      ──►  dist/ (fichiers web)
 ```
 
 Un même code source, construit de façon reproductible, donne un **artifact identique** — c'est cette reproductibilité qui permet de passer de celui-ci en production sans surprise.
+
+##### Petit lexique des outils cités dans ce bloc
+
+> ℹ️ **Tu n'as pas besoin d'installer ni de maîtriser ces outils maintenant.** Voici simplement de quoi on parle, pour que ces noms ne te surprennent pas quand tu les rencontreras :
+
+| Outil / terme | C'est quoi ? | Tu l'apprendras vraiment… |
+|----------------|--------------|----------------------------|
+| **Java** | Un **langage de programmation** (avec JavaScript, l'un des deux exemples du parcours). | Bloc 03 |
+| **Maven** | L'outil qui **compile** le code Java et produit l'**.jar** (l'artifact). | Bloc 03 |
+| **Node.js / npm** | Node.js exécute du **JavaScript** ; npm en gère les outils et le build. | Bloc 03 |
+| **Spring Boot / NestJS** | Des **frameworks** (cadres prêts à l'emploi) pour créer des apps web plus vite. | Bloc 03/04 |
+| **`.jar` / `dist/`** | Deux **formes d'artifact** : un fichier exécutable Java / un dossier de fichiers web. | Bloc 1 (L3-L4) |
+| **curl** | Commande pour **interroger une adresse web** depuis le terminal (ex. vérifier qu'une app répond). | Bloc 05 |
+| **healthcheck** | Un « **contrôle de santé** » (ex. l'adresse `/health`) qui dit si l'app démarre bien. | Bloc 1 (L3-L4) |
 
 ---
 
@@ -216,6 +230,10 @@ Coche chaque case que tu réussis :
 - [ ] Je sais **définir** build et artifact, et citer un exemple de commande Maven et npm.
 - [ ] Je sais **justifier** pourquoi on teste en staging avant la production.
 - [ ] J'ai complété **l'exercice** (tests, environnements, build, staging) et vérifié avec `03-correction.md`.
+
+---
+
+🧭 **Pont vers la suite** — Tu sais maintenant *vérifier* (tests) et *où faire tourner* (environnements). Il reste une grande question : **où vit le code, et comment part-il de là pour arriver jusqu'en production ?** La réponse fait intervenir **Git**, l'outil qui stocke et versionne le code. *Note : tu apprendras Git en détail au Bloc 04 — ici, on le voit juste comme le « point de départ » du parcours.* C'est l'objet de la Leçon 4.
 
 ---
 

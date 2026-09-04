@@ -177,6 +177,27 @@ deactivate                          # quitte l'environnement
 ```
 
 > 💡 Vérifie avec `which python3` avant/après `activate` : le chemin pointe vers `.venv/bin/python3`, signe qu'on travaille dans l'environnement isolé.
+### 3.8 🛡️ Aperçu DevSecOps — appeler des commandes système avec `subprocess`
+
+En DevOps, Python sert souvent à **lancer des commandes système** (`df`, `systemctl`, `docker`…). L'outil standard est le module `subprocess` :
+
+```python
+import subprocess
+
+result = subprocess.run(
+    ["df", "-h", "/"],          # ✅ une LISTE d'arguments
+    capture_output=True,
+    text=True,
+    check=True,                  # lève une erreur si la commande échoue
+)
+print(result.stdout)
+```
+
+> ⚠️ **Règle de sécurité (DevSecOps)** : passe toujours une **liste** d'arguments, et **jamais `shell=True`** avec une donnée qui vient de l'utilisateur ou d'un fichier externe — sinon tu ouvres la porte à une **injection de commande** (quelqu'un fait exécuter `; rm -rf /` à ton script). Exemple interdit : `subprocess.run(f"ls {dossier}", shell=True)` si `dossier` n'est pas contrôlé.
+>
+> Ce sujet est approfondi dans la **leçon 6** (Python automatisation) — ici, retiens juste le réflexe : *liste d'arguments, pas de `shell=True` sur des entrées externes*.
+
+---
 ---
 
 ## 4. Bonnes pratiques modernes (2025-2026)
@@ -206,6 +227,25 @@ deactivate                          # quitte l'environnement
 
 ---
 
+## 6. Exercice pratique
+
+> ⚠️ L'exercice détaillé est dans **`02-exercice.md`**, la correction commentée dans **`03-correction.md`**. Lis bien cette leçon avant de t'y mettre.
+
+**Énoncé court** : dans un `venv`, écris un petit script Python `mon_inventaire.py` : crée un **dictionnaire** décrivant un service (nom, port, tags), une **liste** de 3 services, boucle dessus avec `for`, écrit la structure en **JSON** dans un fichier (module `json`), recharge-le avec `pathlib`, et gère une erreur ciblée avec `try/except`.
+
+---
+
+## 7. Correction détaillée de l'exercice
+
+> La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement :
+- on travaille dans un **`venv`** (`python3 -m venv .venv && source .venv/bin/activate`) pour isoler ;
+- **listes** `[]` et **dictionnaires** `{}` (`for service in services:` pour itérer) ;
+- **`json.dump`** pour écrire et **`json.load`** pour relire — jamais de parsing à la main ;
+- **`pathlib`** (`Path`) moderne pour les chemins ;
+- **`try/except ValueError`** ciblé, jamais d'exception générique qui cache tout.
+
+---
+
 ## 8. Checklist de validation
 
 - [ ] Je sais installer/configurer un environnement `venv` + `pip` et l'activer (`source .venv/bin/activate`).
@@ -218,6 +258,10 @@ deactivate                          # quitte l'environnement
 
 ---
 
-> 📖 Prochaine étape : fais l'**exercice pratique** dans `02-exercice.md`, puis compare avec `03-correction.md`.
+🧭 **Pont vers la suite** — Tu sais maintenant écrire du **Python** (variables, listes/dicts, fichiers, JSON). Mais un script DevOps ne se limite pas au disque : il **interagit** — avec des fichiers, des commandes système et surtout des **APIs HTTP**. La **Leçon 6** te fait passer à l'automatisation réelle : `subprocess`, `requests` (HTTP), et manipulation de données.
+
+---
+
+*Prochaine étape :* Leçon 6 — **Automatisation avec Python** dans `06-Python-automatisation/`.
 
 > 💡 **Lien avec tes acquis** : une **liste** Python ≈ un tableau JS ; un **dictionnaire** Python ≈ un objet JS ; un `for` Python ≈ un `for...of` JS. Tu retrouves tes concepts, juste une autre syntaxe.

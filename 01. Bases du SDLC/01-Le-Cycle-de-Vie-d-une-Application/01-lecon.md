@@ -1,6 +1,7 @@
 # Leçon 1 — Le cycle de vie d'une application (SDLC)
 
 > **Bloc 1 · Bases du SDLC** — Leçon 1 sur 4
+> *(Début de bloc : pense à lire d'abord l'introduction `00-Introduction-Bloc.md`.)*
 > Ce premier module pose les fondations : tu vas comprendre ce qu'est le **cycle de vie d'un logiciel**, pourquoi il existe, et comment il s'articule avec le DevOps.
 
 ---
@@ -10,7 +11,7 @@
 À la fin de cette leçon, tu seras capable de :
 
 1. **Définir le SDLC** (Software Development Life Cycle) avec tes propres mots, sans jargon.
-2. **Lister et expliquer** les 7 étapes du cycle de vie d'une application, dans l'ordre.
+2. **Lister et expliquer** les 8 phases du cycle de vie d'une application, dans l'ordre.
 3. **Distinguer** le SDLC (cycle de vie) du DevOps (culture + outils autour de ce cycle).
 4. **Donner une analogie** simple pour faire comprendre chaque étape à un néophyte.
 5. **Expliquer pourquoi** chaque étape existe et ce qui se passe si on la saute.
@@ -28,9 +29,9 @@ Un logiciel, c'est pareil. Le **SDLC** est le **chemin obligatoire** qu'une appl
 
 > 💡 **DevOps en une phrase** : si le SDLC est *le parcours*, le **DevOps** est la *façon de conduire et d'automatiser ce parcours* (outils, automatisation, collaboration, feedback rapide). On ne peut pas faire de DevOps sans comprendre le SDLC.
 
-##### Les 7 étapes du cycle de vie
+##### Les 8 phases du cycle de vie
 
-Voici les étapes dans l'ordre. C'est le fil rouge que tu retrouveras dans toutes les leçons suivantes :
+Un logiciel passe par **8 phases**, dans l'ordre. C'est le fil rouge que tu retrouveras dans toutes les leçons suivantes (et dans ton exercice). Pas une de plus, pas une de moins — retiens bien ce nombre :
 
 ```
 Besoin
@@ -47,21 +48,23 @@ Intégration
   ↓
 Déploiement
   ↓
-Production
-  ↓
-Monitoring & Maintenance
+Production, Monitoring & Maintenance
 ```
+
+> 🧠 **Astuce pour retenir le nombre** : on groupe en **4 blocs** → *avant* (Besoin, Analyse), *conception* (Conception), *code* (Développement, Tests, Intégration), *service* (Déploiement, Production/Monitoring). Ça reste **8 phases**.
+
+> 🧠 **Pourquoi ton livre parle de 8 phases alors qu'on entend souvent « 7 étapes » ?** Beaucoup de cours listent les 7 étapes classiques : *Analyse → Conception → Développement → Test → Déploiement → Maintenance* (parfois + *Planification*). C'est **le même cycle**, juste regardé de plus loin : on y **fusionne** « Tests + Intégration » dans une seule case, et « Production + Monitoring » dans « Maintenance ». Ici, on **sépare** l'*Intégration* pour bien montrer la différence entre « une brique marche seule » et « les briques marchent ensemble » — un point central du DevOps (l'Intégration Continue, qu'on abordera au fichier CI/CD). **Ce qui compte n'est pas le nombre, mais l'ordre du raisonnement**, identique dans les deux versions.
 
 | Étape | Question qu'elle répond | Analogie (la maison) |
 |-------|-------------------------|----------------------|
-| **Analyse du besoin** | *Quoi ?* Pour qui ? Quel problème ? | On écoute le client : « maison de 3 pièces, avec jardin » |
+| **Besoin** | *Quel problème ?* Pour qui ? | On sait qu'on veut « une maison de 3 pièces, avec jardin » |
+| **Analyse du besoin** | *Quoi exactement ?* Attentes précises | On écoute le client : « 3 pièces, jardin, garage » |
 | **Conception** | *Comment ?* Architecture, choix techniques | On dessine les plans de la maison |
 | **Développement** | *On écrit le code* | On construit les murs, on pose les fenêtres |
 | **Tests** | *Est-ce que ça marche ?* | On vérifie que le toit tient, que les portes ferment |
 | **Intégration** | *Est-ce que les pièces vont ensemble ?* | On raccorde électricité, plomberie, mur porteur |
 | **Déploiement** | *On met en service* | On livre les clés, on emménage |
-| **Production** | *Les vrais utilisateurs s'en servent* | La maison est habitée |
-| **Monitoring & Maintenance** | *Ça tourne toujours bien ?* | On entretient, on répare, on ajoute une pièce |
+| **Production & Monitoring & Maintenance** | *Ça tourne toujours bien ?* | La maison est habitée ; on l'entretient, on répare, on ajoute une pièce |
 
 ##### Le « comment » : comment ça se passe concrètement ?
 
@@ -84,7 +87,7 @@ Le **quand** utiliser ce cycle ? **Toujours**, pour la moindre fonctionnalité, 
 
 ##### En résumé
 
-- Le **SDLC** = le cycle de vie complet d'un logiciel (7 étapes).
+- Le **SDLC** = le cycle de vie complet d'un logiciel (8 phases).
 - Le **DevOps loop** = la façon moderne de parcourir ces étapes en boucle rapide et automatisée.
 - Un DevOps **ne code pas que du code** : il comprend toutes les étapes pour faire circuler une application de l'idée à la production le plus vite et le plus sûrement possible.
 
@@ -201,13 +204,17 @@ En prenant l'exemple du **panier d'achat** :
 
 Coche chaque case que tu réussis :
 
-- [ ] Je sais définir le **SDLC** et expliquer le rôle de chacune de ses **7 étapes**.
+- [ ] Je sais définir le **SDLC** et expliquer le rôle de chacune de ses **8 phases**.
 - [ ] Je sais **ordonner** les étapes du cycle de vie.
 - [ ] Je sais **distinguer** SDLC (le cycle) et DevOps (la façon de l'exécuter).
 - [ ] Je sais **donner une analogie** (maison, restaurant…) pour chaque étape.
 - [ ] Je peux **expliquer pourquoi** on ne doit sauter l'analyse ni les tests.
 - [ ] Je peux **décrire le parcours** d'une application du besoin à la maintenance avec mes propres mots.
 - [ ] J'ai réalisé **l'exercice** sur une fonctionnalité de mon choix et vérifié ma correction.
+
+---
+
+🧭 **Pont vers la suite** — Tu connais maintenant les **8 phases** du cycle de vie d'une application. Mais dans la vraie vie, un projet ne démarre pas par « coder » : il commence par **organiser** ce qu'on va faire. C'est exactement l'objet de la Leçon 2 : comment on **planifie** et **priorise** le travail (le backlog) avant de coder.
 
 ---
 

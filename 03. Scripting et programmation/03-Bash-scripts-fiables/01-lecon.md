@@ -88,6 +88,9 @@ trap cleanup EXIT              # execute cleanup a la sortie (meme en cas d'eche
 # ... corps du script
 ```
 
+> 💡 **Aller plus loin — nettoyer aussi sur interruption** : `trap cleanup INT TERM EXIT` exécute le nettoyage non seulement à la sortie normale, mais aussi si le script est interrompu (`Ctrl+C` → signal INT) ou terminé (`kill` → TERM). C'est le réflexe d'un script de production : aucun fichier temporaire ni processus ne doit rester en plan, même si on coupe le script en pleine exécution.
+```
+
 ### 3.4 Valider arguments et prérequis
 
 ```bash
@@ -158,6 +161,25 @@ set +x   # desactive
 
 ---
 
+## 6. Exercice pratique
+
+> ⚠️ L'exercice détaillé est dans **`02-exercice.md`**, la correction commentée dans **`03-correction.md`**. Lis bien cette leçon avant de t'y mettre.
+
+**Énoncé court** : transforme un script « fragile » donné en un script **fiable** : ajoute `set -euo pipefail`, crée un fichier temporaire avec `mktemp`, nettoie-le avec `trap cleanup EXIT`, valide l'environnement reçu (regex `production|staging`), journalise chaque étape avec horodatage vers `stderr`, et passe le tout dans `shellcheck`.
+
+---
+
+## 7. Correction détaillée de l'exercice
+
+> La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement :
+- `set -euo pipefail` en tête → **échoue tôt** dès qu'une commande échoue ;
+- `mktemp` → chemin **sûr** et `trap cleanup EXIT` → nettoyé **même en cas d'échec** ;
+- la **validation** (`[[ "$ENV" =~ ^(production|staging)$ ]] || exit 1`) avant d'agir évite de planter au milieu ;
+- **journaliser vers stderr** (`>&2`) pour ne pas polluer le stdout exploitable ;
+- **`set -x` / `bash -x`** pour déboguer, et **`shellcheck`** pour vérifier le style et les bugs.
+
+---
+
 ## 8. Checklist de validation
 
 - [ ] J'ai `set -euo pipefail` en tête de chaque script.
@@ -170,4 +192,8 @@ set +x   # desactive
 
 ---
 
-> 📖 Prochaine étape : fais l'**exercice pratique** dans `02-exercice.md`, puis compare avec `03-correction.md`.
+🧭 **Pont vers la suite** — Tes scripts Bash sont désormais **fiables** (ils échouent vite et proprement). Mais un script ne vit pas seul : il manipule et produit de la **donnée** — configuration, résultats. La **Leçon 4** te donne les deux **formats** incontournables (YAML & JSON) et les outils pour les lire/écrire (`jq`/`yq`), que tu retrouveras dans Docker, Kubernetes, CI/CD et les APIs.
+
+---
+
+*Prochaine étape :* Leçon 4 — **Formats de données YAML & JSON** dans `04-YAML-et-JSON/`.

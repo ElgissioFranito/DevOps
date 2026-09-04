@@ -208,6 +208,25 @@ pip freeze > requirements.txt   # contient désormais requests==...
 
 ---
 
+## 6. Exercice pratique
+
+> ⚠️ L'exercice détaillé est dans **`02-exercice.md`**, la correction commentée dans **`03-correction.md`**. Lis bien cette leçon avant de t'y mettre.
+
+**Énoncé court** : écris un script `verif_api.py` qui (1) lance une commande système avec `subprocess.run([...])` (ex. `df -h /`), (2) fait un appel HTTP GET vers une API de type « health » avec `requests` et affiche son statut, (3) traite la réponse JSON, (4) gère une erreur ciblée (service injoignable ou fichier absent), et lit ses éventuelles valeurs de configuration depuis `os.environ` plutôt qu'en dur.
+
+---
+
+## 7. Correction détaillée de l'exercice
+
+> La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement :
+- `subprocess.run([...])` avec une **liste d'arguments** (pas de `shell=True` sur entrée non sûre) ;
+- `requests.get(...)` avec vérification du `status_code`, `.json()` pour parser la réponse ;
+- **gérer les erreurs réseau** (`requests.exceptions`) de façon ciblée et **journaliser** ;
+- ne **jamais hardcoder** d'URL/secret : on lit via `os.environ.get("URL")` ;
+- retourner un **code de sortie** cohérent (0 OK, 1 problème) exploitable.
+
+---
+
 ## 8. Checklist de validation
 
 - [ ] Je lance une commande avec `subprocess.run(["cmd", "arg"], capture_output=True, text=True)` et je lis `returncode` / `stdout` / `stderr`.
@@ -220,6 +239,10 @@ pip freeze > requirements.txt   # contient désormais requests==...
 
 ---
 
-> 📖 Prochaine étape : fais l'**exercice pratique** dans `02-exercice.md`, puis compare avec `03-correction.md`.
+🧭 **Pont vers la suite** — Tu maîtrises maintenant Bash **et** Python, les données (YAML/JSON), et l'automatisation (system, fichiers, HTTP). Il est temps de **tout assembler** : c'est la **Leçon 7**, le projet récapitulatif du bloc, qui construit un **outil de diagnostic système complet** (serveur, disque, service, logs, rapport) — le critère « bloc acquis » de la roadmap.
+
+---
+
+*Prochaine étape :* Leçon 7 — **Projet : script de diagnostic & rapport** dans `07-Projet-recapitulatif-scripting/`.
 
 > 💡 **Lien avec tes acquis Java** : un appel `requests.get(...)` = ton `RestTemplate`/`WebClient` côté Java ; le JSON réponse se convertit en dict Python (comme une désérialisation en objet/DTO). Tu connais déjà les verbes et codes HTTP — seule la syntaxe d'appel change.

@@ -1,7 +1,7 @@
 # Leçon 2 — Planification et backlog
 
 > **Bloc 1 · Bases du SDLC** — Leçon 2 sur 4
-> Après avoir compris le cycle de vie, tu vas apprendre comment on **organise le travail** avant et pendant le développement : le backlog, les User Stories, les sprints, la priorisation et l'estimation.
+> 🧭 **Pont depuis la Leçon 1** : la Leçon 1 t'a donné le *parcours* d'une application (les 8 phases du cycle de vie), mais pas la façon de **choisir quoi faire en premier**. Cette leçon transforme ce parcours en **liste de travail organisée** : le backlog, les User Stories, les sprints, la priorisation et l'estimation.
 
 ---
 
@@ -172,6 +172,10 @@ Coche chaque case que tu réussis :
 - [ ] Je sais **prioriser** avec MoSCoW (et connaître l'idée de RICE).
 - [ ] Je sais **estimer** en points relatifs (1-2-3-5-8) et justifier.
 - [ ] J'ai **construit un backlog complet** dans `02-exercice.md` et vérifié ma correction.
+
+---
+
+🧭 **Pont vers la suite** — On a décidé *quoi* faire (le backlog) et *dans quel ordre* (les sprints). La suite logique : **vérifier que ce qu'on livre fonctionne** et **choisir où le faire tourner**. La Leçon 3 relie donc le travail planifié aux **tests** et aux **environnements** (dev / staging / prod) — sans ces garde-fous, on livrerait n'importe comment.
 
 ---
 

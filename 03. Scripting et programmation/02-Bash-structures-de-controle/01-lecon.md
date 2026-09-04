@@ -190,6 +190,25 @@ fi
 
 ---
 
+## 6. Exercice pratique
+
+> ⚠️ L'exercice détaillé est dans **`02-exercice.md`**, la correction commentée dans **`03-correction.md`**. Lis bien cette leçon avant de t'y mettre.
+
+**Énoncé court** : écris un script `choix.sh` qui, selon un environnement passé en argument (`production` / `staging` / autre), utilise `case` pour afficher un message adapté ; définit une fonction `log()` avec horodatage ; boucle sur une liste de fichiers `.conf` pour afficher leur nom (vérifie leur existence avec `[ -f "$f" ]`) ; et renvoie `0` si tous les fichiers existent, `1` sinon.
+
+---
+
+## 7. Correction détaillée de l'exercice
+
+> La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement :
+- la **structure `case`** est idéale pour un choix multiple exclusif (production/staging/autre) ;
+- une **fonction `log()`** avec `local msg="$1"` et `$(date ...)`  réutilise le bloc d'affichage (DRY) ;
+- on **compare les fichiers** avec `[ -f "$f" ]`, on **cite** toujours la variable ;
+- le **`for`** itère sur une **liste réelle** (`*.conf` ou une liste) plutôt que de fabriquer des arguments ;
+- on **retourne** le bon code (`exit 0/1`) après le parcours.
+
+---
+
 ## 8. Checklist de validation
 
 - [ ] Je sais écrire une condition `if/elif/else` avec `[[ ]]` et les opérateurs de comparaison (`-eq`, `-ne`, `-gt`, `-lt`).
@@ -201,4 +220,8 @@ fi
 
 ---
 
-> 📖 Prochaine étape : fais l'**exercice pratique** dans `02-exercice.md`, puis compare avec `03-correction.md`.
+🧭 **Pont vers la suite** — Tu sais maintenant écrire des scripts qui **prennent des décisions** (if/for/case/fonctions). Mais en production, un script doit être **fiable**, pas seulement fonctionnel : échouer tôt, nettoyer en cas d'erreur, valider ses entrées. C'est exactement ce que fait la **Leçon 3** : `set -euo pipefail`, `trap`, validation et `shellcheck`.
+
+---
+
+*Prochaine étape :* Leçon 3 — **Écrire des scripts Bash fiables** dans `03-Bash-scripts-fiables/`.

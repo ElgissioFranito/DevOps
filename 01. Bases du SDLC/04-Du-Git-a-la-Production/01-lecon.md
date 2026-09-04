@@ -1,7 +1,7 @@
 # Leçon 4 — Du Git à la production
 
 > **Bloc 1 · Bases du SDLC** — Leçon 4 sur 4 (synthèse du bloc)
-> Cette dernière leçon relie **tout ce que tu as appris** : cycle de vie (L1), backlog (L2), tests & environnements (L3). Tu vas décrire le **parcours complet** d'une application, du code dans Git jusqu'au serveur de production, avec les échanges concrets (Git, build, tests, artifact, déploiement).
+> 🧭 **Pont depuis la Leçon 3** : tu sais *vérifier* (tests) et *où faire tourner* (environnements). Cette dernière leçon relie **tout ce que tu as appris** : cycle de vie (L1), backlog (L2), tests & environnements (L3). Tu vas décrire le **parcours complet** d'une application, du code dans Git jusqu'au serveur de production, avec les échanges concrets (Git, build, tests, artifact, déploiement).
 
 ---
 
@@ -62,6 +62,14 @@ Le grand principe DevOps moderne : **on déploie en production l'exact même art
 ---
 
 #### 3. Exemples concrets
+
+> ⚠️ **Inutile d'installer quoi que ce soit ni d'exécuter ces commandes maintenant.** Ce bloc est **100 % conceptuel**. Les commandes ci-dessous servent uniquement à **voir concrètement** le parcours que tu viens de comprendre. Tout sera refait proprement et expliqué quand tu auras les outils :
+> - **Git** (`git add`, `commit`, `push`) → Bloc 04 « Git ».
+> - **Maven / npm / Java / Node** → Bloc 03 (scripting & programmation).
+> - **ssh / scp / serveur / déploiement** → Bloc 02 (Linux) et Bloc 11 (CI/CD).
+> - **curl** → Bloc 05 (réseau).
+
+> 🧠 **Mini-glossaire des commandes d'exemple** : *`git add .`* = prépare les fichiers modifiés ; *`git commit -m "..."`* = enregistre une version ; *`git push`* = envoie la version vers le dépôt Git ; *`mvn clean package`* = compile et génère l'`.jar` ; *`npm run build`* = génère le dossier de fichiers web ; *`scp`* = copie un fichier vers un serveur distant ; *`ssh`* = se connecte au serveur distant ; *`curl`* = interroge une adresse web pour vérifier.
 
 ##### Exemple 1 — Le parcours complet (Spring Boot / Maven)
 
@@ -180,4 +188,8 @@ Coche chaque case que tu réussis :
 
 ---
 
-*Bloc 1 terminé ✅. Suite logique :* Bloc 02 — **Système d'exploitation — Linux**.
+🧭 **Pont vers le Bloc 02 (Linux)** — Tu sais maintenant *raconter* le parcours complet d'une application jusqu'au serveur de production. Mais pour **faire tourner réellement** une application, il faut un **système d'exploitation** sur ce serveur : c'est le rôle du **Bloc 02 — Linux** (le « langage » des serveurs). Tu y passeras du conceptuel au **concret** : commandes, fichiers, utilisateurs, services. C'est là que tu commenceras à *manipuler* pour de vrai ce que tu viens de comprendre sur le papier.
+
+---
+
+*Suite logique :* Bloc 02 — **Système d'exploitation — Linux**.

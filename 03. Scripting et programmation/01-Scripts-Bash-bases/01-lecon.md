@@ -157,6 +157,24 @@ printf "%s - %s\n" "2026-09-03" "Application demarree"    # format precis
 
 ---
 
+## 6. Exercice pratique
+
+> ⚠️ L'exercice détaillé est dans **`02-exercice.md`**, la correction commentée dans **`03-correction.md`**. Lis bien cette leçon avant de t'y mettre.
+
+**Énoncé court** : écris un premier script `deploy.sh` avec `#!/usr/bin/env bash`, qui prend 1 argument (l'environnement `production` ou `staging`), définit `NOM` et `PORT`, affiche l'environnement choisi avec `echo`/`printf`, réagit à un environnement inconnu par un code de sortie `1`, et retourne `0` sinon. Rend-le exécutable et teste les 3 cas.
+
+---
+
+## 7. Correction détaillée de l'exercice
+
+> La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement :
+- le script est un **fichier texte** avec un **shebang** et `chmod +x` ;
+- on **cite les variables** et on lit les **arguments** `$1`, `$#`, `$@` ;
+- les **codes de sortie** : `exit 0` pour succès, `exit 1` pour erreur — c'est ce que la CI/CD lira ;
+- on teste le comportement attendu : `production`/`staging` → `0`, inconnu → `1`.
+- On passe dans `shellcheck` pour vérifier le style.
+
+---
 ## 8. Checklist de validation
 
 - [ ] Je peux **expliquer** ce qu'est un script Bash et donner 3 situations où l'automatiser.
@@ -164,6 +182,11 @@ printf "%s - %s\n" "2026-09-03" "Application demarree"    # format precis
 - [ ] Je sais créer des **variables** sans espace autour du `=` et les **citer** correctement.
 - [ ] Je sais lire les **arguments** `$1`, `$#`, `$@` dans un script.
 - [ ] Je sais utiliser **`exit 0` / `exit 1`** et récupérer `$?` au bon moment.
+🧭 **Pont vers la suite** — Tu sais écrire un script Bash simple (variables, arguments, exit codes). Mais un script **utile** prend des décisions : conditions, boucles, fonctions. C'est l'objet de la **Leçon 2** : les structures de contrôle et fonctions Bash, qui transposent ta logique Java/JS au shell.
+
+---
+
+*Prochaine étape :* Leçon 2 — **Structures de contrôle et fonctions Bash** dans `02-Bash-structures-de-controle/`.
 - [ ] Je sais choisir `echo` ou `printf` et commenter utilement.
 
 ---

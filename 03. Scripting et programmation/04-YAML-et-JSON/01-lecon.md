@@ -144,7 +144,7 @@ ports:
   - 443
 ```
 
-### 3.5 JSON strict : traque aux virgules et guillemets
+> **🛡️ DevSecOps — jamais de secrets en dur dans JSON/YAML** : que ce soit dans un `docker-compose.yml`, un manifest ou un `.conf`, on **ne met jamais** de mot de passe/clé/TOKEN en clair dans le fichier ni dans Git. On utilise des **variables d'environnement / références** (`${VAR}`, `env:`, `--from-env-file`) alimentées par un **coffre à secrets** (Vault, secret manager, secrets CI). Un fichier YAML avec un token exposé est une **faille courante** (fichier commité par erreur). Cette habitude devra t'être *naturelle* avant les blocs Docker/CI/CD.
 
 ```json
 {
@@ -183,6 +183,25 @@ ports:
 
 ---
 
+## 6. Exercice pratique
+
+> ⚠️ L'exercice détaillé est dans **`02-exercice.md`**, la correction commentée dans **`03-correction.md`**. Lis bien cette leçon avant de t'y mettre.
+
+**Énoncé court** : à partir d'un exemple de `docker-compose.yml` (services, environnements, volumes — comme dans la leçon) et d'une réponse d'API JSON, écris la **version YAML** d'un manifest minimal (indentation 2 espaces), convertis-la **mentalement** en JSON, puis valide : lis un champ avec `jq`, transforme un fichier YAML avec `yq`, et repère à l'œil une mauvaise indentation / tabulation.
+
+---
+
+## 7. Correction détaillée de l'exercice
+
+> La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement :
+- **2 espaces**, jamais de tabulation ; une **liste** introduite par `-` alignée, un **objet** imbriqué décalé d'un niveau ;
+- la **même structure** JSON ↔ YAML (mêmes clés/valeurs, syntaxe différente), on la convertit à la main ;
+- **`jq`** (JSON) : `.champ`, `jq -c`, `jq .` ; **`yq`** (YAML) : `yq eval . fichier.yml` pour lire ;
+- **valider avant** (`yq eval . > /dev/null` / `kubectl apply --dry-run`) pour attraper les erreurs tôt ;
+- repérer **tabulation** et **alignement** des `-` = le piège n°1 YAML.
+
+---
+
 ## 8. Checklist de validation
 
 - [ ] Je sais écrire **JSON** correct (doubles guillemets, virgules entre éléments, pas de virgule finale).
@@ -194,4 +213,8 @@ ports:
 
 ---
 
-> 📖 Prochaine étape : fais l'**exercice pratique** dans `02-exercice.md`, puis compare avec `03-correction.md`.
+🧭 **Pont vers la suite** — Tu sais maintenant écrire et lire de la **donnée** (YAML/JSON) en scripts. Mais quand la logique devient complexe — fichiers, API, erreurs — **Bash atteint ses limites**. La suite du bloc bascule donc vers le **langage du DevOps moderne** : **Python**. La **Leçon 5** te montre sa syntaxe et la mise en place d'un environnement propre (`venv`).
+
+---
+
+*Prochaine étape :* Leçon 5 — **Introduction à Python pour DevOps** dans `05-Python-pour-DevOps-bases/`.
