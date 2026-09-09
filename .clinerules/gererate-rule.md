@@ -59,7 +59,25 @@ Chaque leçon doit être écrite en Markdown et respecter EXACTEMENT cette struc
     - 03-correction.md : contient la Correction détaillée de l’exercice, réécris la checklist de validation + conseils
     - si besoin des fichiers supplémentaires
 - ⚠️ **Convention de nommage** : écrire les fichiers sans accent . Les accents dans les noms de fichiers provoquent des problèmes techniques (chemins, scripts, Git). C'est valable aussi pour les noms de dossiers : éviter les noms contenant apostrophes et/ou accentuer.
-- les dossiers de leçon n'ont pas forcement le même gabarits, ça depend de la complexité et les nombres de sujets qu'il faut aborder.
+- les dossiers de leçon n'ont pas forcement le même gabarits (nombre de fichiers et nombre de lignes), ça depend de la complexité et les nombres de sujets qu'il faut aborder.
+
+## 🎓 Clarté pour le débutant motivé (Obligatoire)
+
+Le projet est conçu pour un **autodidacte débutant motivé**. Toute leçon (leçon, exercice, correction, références) doit être **compréhensible sans sujets d'étonnement** :
+
+- **Zéro terme/abréviation non défini** : chaque fois qu'un terme technique, sigle ou abréviation apparaît (ex. TCP, UDP, HTTP, DNS, CIDR, NAT, TLS, WAF, RBAC, CVE, SAST, x509, SAN…), il doit être **défini la première fois** en clair, puis rappelé brièvement si utile.
+- Penser « **le débutant ne sait rien de ce terme** » : ne jamais l'utiliser sans explication (même les plus « évidents » comme *port*, *paquet*, *localhost*, *header*, *API*, *JSON*).
+- **Systématiquement** donner une **analogie** simple pour les concepts abstraits (courrier, portier, annuaire…).
+- Expliquer toujours le **« pourquoi, comment et quand »**.
+- Ajouter à chaque leçon un **mini-glossaire** (« 📖 Vocabulaire / Abréviations ») regroupant tous les termes nouveaux, avec une définition d'une ligne, positionné avant la section des exemples concrets.
+- Les **commandes sont commentées ligne par ligne** en français.
+- Dans l'exercice et la correction, **toute commande ou option** (ex. `-c`, `-vv`, `-I`) est expliquée à son premier emploi.
+- Ne jamais supposer de connaissances préalables hors des blocs précédents ; si un concept vient d'un autre bloc, **le rappeler** et renvoyer.
+- **Soigner les transitions logiques** pour supprimer l'étonnement, partout :
+  - **entre les leçons** : chaque leçon commence par un encart « 🧭 Pont depuis… » explicitant ce qui précède et s'achève par une « Prochaine étape » indiquant pourquoi la suite découle logiquement ;
+  - **entre les fichiers** d'une même leçon (01-lecon → 02-exercice → 03-correction → références) : expliquer comment chacun s'articule, rien ne doit surgir sans explication ;
+  - **entre les sections** d'un même fichier : chaque section (y compris le passage de la section 2 « Explication simple » à la 3 « Exemples concrets ») se raccroche à la précédente ; ne jamais introduire brutalement un nouvel outil/concept sans rappel ;
+  - à chaque changement de sujet, dire **pourquoi on passe d'un point à un autre** (en une phrase) pour que l'apprenant suive le fil sans « où suis-je ? ».
 
 ## Comportement
 
