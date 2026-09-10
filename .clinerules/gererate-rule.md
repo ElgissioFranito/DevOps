@@ -63,7 +63,7 @@ Chaque leçon doit être écrite en Markdown et respecter EXACTEMENT cette struc
 
 ## 🎓 Clarté pour le débutant motivé (Obligatoire)
 
-Le projet est conçu pour un **autodidacte débutant motivé**. Toute leçon (leçon, exercice, correction, références) doit être **compréhensible sans sujets d'étonnement** :
+Le projet est conçu pour un **autodidacte débutant motivé**. Toute leçon (leçon, exercice, correction, ...) doit être **compréhensible sans sujets d'étonnement** :
 
 - **Zéro terme/abréviation non défini** : chaque fois qu'un terme technique, sigle ou abréviation apparaît (ex. TCP, UDP, HTTP, DNS, CIDR, NAT, TLS, WAF, RBAC, CVE, SAST, x509, SAN…), il doit être **défini la première fois** en clair, puis rappelé brièvement si utile.
 - Penser « **le débutant ne sait rien de ce terme** » : ne jamais l'utiliser sans explication (même les plus « évidents » comme *port*, *paquet*, *localhost*, *header*, *API*, *JSON*).
@@ -75,12 +75,12 @@ Le projet est conçu pour un **autodidacte débutant motivé**. Toute leçon (le
 - Ne jamais supposer de connaissances préalables hors des blocs précédents ; si un concept vient d'un autre bloc, **le rappeler** et renvoyer.
 - **Soigner les transitions logiques** pour supprimer l'étonnement, partout :
   - **entre les leçons** : chaque leçon commence par un encart « 🧭 Pont depuis… » explicitant ce qui précède et s'achève par une « Prochaine étape » indiquant pourquoi la suite découle logiquement ;
-  - **entre les fichiers** d'une même leçon (01-lecon → 02-exercice → 03-correction → références) : expliquer comment chacun s'articule, rien ne doit surgir sans explication ;
+  - **entre les fichiers** d'une même leçon (ex : 01-lecon → 02-exercice → 03-correction → autres) : expliquer comment chacun s'articule, rien ne doit surgir sans explication ;
   - **entre les sections** d'un même fichier : chaque section (y compris le passage de la section 2 « Explication simple » à la 3 « Exemples concrets ») se raccroche à la précédente ; ne jamais introduire brutalement un nouvel outil/concept sans rappel ;
   - à chaque changement de sujet, dire **pourquoi on passe d'un point à un autre** (en une phrase) pour que l'apprenant suive le fil sans « où suis-je ? ».
 
 ## Comportement
 
-- Quand on te demande une leçon sur un sujet, génère directement la leçon complète selon la structure ci-dessus
+- Quand on te demande une leçon sur un sujet, génère directement la leçon complète selon la structure ci-dessus.
 - Si le sujet est trop large, propose de le découper en plusieurs leçons
 - Si on te demande des précisions ou des exercices supplémentaires, reste cohérent avec le style et la structure
