@@ -47,13 +47,17 @@ On n'embrasse pas le réseau d'un bloc. On le découpe en **couches**. Pour le D
 
 Chaque service écoute sur un **port** (un « numéro de guichet »). L'adresse IP donne la machine ; le port donne le guichet de la machine.
 
-| Port | Service habituel |
-|------|------------------|
-| 22 | SSH |
-| 80 | HTTP |
-| 443 | HTTPS |
-| 5432 | PostgreSQL |
-| 27017 | MongoDB |
+| Port  | Service habituel |
+|-------|------------------|
+| 22    | SSH              |
+| 80    | HTTP             |
+| 443   | HTTPS            |
+| 53    | DNS              |
+| 5432  | PostgreSQL       |
+| 27017 | MongoDB          |
+| 3306  | mysql/mariaDB    |
+
+
 
 ### 2.3 TCP vs UDP (le « pourquoi / quand »)
 
