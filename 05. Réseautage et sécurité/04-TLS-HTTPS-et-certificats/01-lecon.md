@@ -1,6 +1,6 @@
 # Leçon 4 — TLS, HTTPS et certificats
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 4 sur 7
+> **Bloc 5 · Réseautage et sécurité** — Leçon 4 sur 8
 > 🧭 **Pont depuis les Leçons 1-3** : tu sais faire circuler les données (protocoles), adresser et filtrer (pare-feu). Dernière brique pour que « app accessible » rime avec **sécurisé** : le **chiffrement TLS/HTTPS** et les **certificats**, que tu manipuleras concrètement avec **`openssl`**. On ne « subit » plus un certificat : on l'inspecte, le génère, le comprend.
 
 ---
@@ -173,8 +173,8 @@ echo | openssl s_client -connect example.com:443 2>/dev/null | openssl x509 -noo
 
 ---
 
-🧭 **Pont vers la suite** — Le trafic est maintenant chiffré et audible. Mais avec plusieurs services (front Angular, backend Spring Boot), on ne veut pas exposer chaque port au public : on place un **reverse proxy / load balancer** devant. C'est la Leçon 5.
+🧭 **Pont vers la suite** — Le trafic web est maintenant **chiffré** (HTTPS). Mais chiffrer une session web, ce n'est pas encore **relier deux réseaux en privé** : pour administrer une machine distante, joindre un service interne ou te protéger sur un Wi-Fi public, il faut un **tunnel VPN**. C'est la Leçon 5 (WireGuard & OpenVPN). Ensuite seulement, avec plusieurs services (front Angular, backend Spring Boot), on placera un **reverse proxy / load balancer** comme point d'entrée unique — c'est la Leçon 6.
 
 ---
 
-*Prochaine étape :* Leçon 5 — **Reverse Proxy et Load Balancing** dans `05-Reverse-Proxy-et-Load-Balancing`.
+*Prochaine étape :* Leçon 5 — **VPN et tunnels sécurisés (WireGuard & OpenVPN)** dans `05-VPN-et-tunnels-securises`.

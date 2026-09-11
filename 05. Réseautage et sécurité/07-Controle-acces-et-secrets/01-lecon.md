@@ -1,7 +1,7 @@
-# Leçon 6 — Contrôle d'accès et secrets
+# Leçon 7 — Contrôle d'accès et secrets
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 6 sur 7
-> 🧭 **Pont depuis la Leçon 5** : tu sais **exposer** une app proprement (proxy) et la protéger en réseau (pare-feu, TLS). Mais l'accès à un système, c'est aussi **qui a le droit de faire quoi** (utilisateurs, rôles) et **où l'on cache les mots de passe/clés** (les *secrets*). Cette leçon t'ouvre à ces deux piliers, présents partout (Kubernetes, IAM cloud, Git).
+> **Bloc 5 · Réseautage et sécurité** — Leçon 7 sur 8
+> 🧭 **Pont depuis la Leçon 6** : tu sais **exposer** une app proprement (proxy) et la protéger en réseau (pare-feu, TLS, VPN). Mais l'accès à un système, c'est aussi **qui a le droit de faire quoi** (utilisateurs, rôles) et **où l'on cache les mots de passe/clés** (les *secrets*). Cette leçon t'ouvre à ces deux piliers, présents partout (Kubernetes, IAM cloud, Git).
 
 ---
 
@@ -231,8 +231,8 @@ env:
 
 ---
 
-🧭 **Pont vers la suite** — Nous avons sécurisé le réseau, l'exposition et les droits. **La sécurité dans le code** (détecter les vulnérabilités tôt) et sa place dans le cycle de vie (DevSecOps) est le dernier pilier de ce bloc : c'est la Leçon 7.
+🧭 **Pont vers la suite** — Nous avons sécurisé le réseau, l'exposition et les droits. **La sécurité dans le code** (détecter les vulnérabilités tôt) et sa place dans le cycle de vie (DevSecOps) est le dernier pilier de ce bloc : c'est la Leçon 8.
 
 ---
 
-*Prochaine étape :* Leçon 7 — **DevSecOps et Shift-Left** dans `07-DevSecOps-et-Shift-Left`.
+*Prochaine étape :* Leçon 8 — **DevSecOps et Shift-Left** dans `08-DevSecOps-et-Shift-Left`.

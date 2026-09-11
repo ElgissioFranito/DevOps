@@ -1,6 +1,6 @@
-# Correction — Leçon 7 : DevSecOps et Shift-Left
+# Correction — Leçon 8 : DevSecOps et Shift-Left
 
-> **Bloc 5 · Leçon 7** — Correction pas à pas.
+> **Bloc 5 · Leçon 8** — Correction pas à pas.
 
 ---
 
@@ -55,5 +55,5 @@ grep -rn "password\|API_KEY\|secret" --exclude-dir=.git .
 ## 🧠 Conseils pour la suite
 
 - **Garde la liste d'outils** (SAST/DAST/…) : elle revient au Bloc 11 (CI/CD).
-- **Ne commit jamais de secret** ; si c'est fait, rotation immédiate (Leçon 6).
+- **Ne commit jamais de secret** ; si c'est fait, rotation immédiate (Leçon 7).
 - La sécurité automatique est un des frères d'œuvre du DevOps : c'est le socle que tu mettras en pipeline plus tard.

@@ -1,6 +1,6 @@
-# Référence rapide — Leçon 7 : DevSecOps & Shift-Left
+# Référence rapide — Leçon 8 : DevSecOps & Shift-Left
 
-> Bloc 5 · Leçon 7 — Aide-mémoire.
+> Bloc 5 · Leçon 8 — Aide-mémoire.
 
 ## Concepts
 - **Shift-left** : contrôler la sécurité le plus tôt possible (dès le code).

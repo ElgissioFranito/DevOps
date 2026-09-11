@@ -1,6 +1,6 @@
 # Leçon 2 — Adressage IP et diagnostic réseau
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 2 sur 7
+> **Bloc 5 · Réseautage et sécurité** — Leçon 2 sur 8
 > 🧭 **Pont depuis la Leçon 1** : tu sais de quoi « se parlent » les machines (protocoles). Mais pour viser une machine précise, il faut une **adresse**. Cette leçon te donne les bases de l'**adressage IP** (IPv4, subnet, gateway, CIDR, IP privée/publique) et les outils **diagnostic** (`ping`, `traceroute`, `ip`) pour suivre un paquet jusqu'à sa cible.
 
 ---

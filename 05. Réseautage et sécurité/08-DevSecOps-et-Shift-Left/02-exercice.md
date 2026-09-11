@@ -1,6 +1,6 @@
-# Exercice — Leçon 7 : DevSecOps et Shift-Left
+# Exercice — Leçon 8 : DevSecOps et Shift-Left
 
-> **Bloc 5 · Leçon 7** — Exercice à faire en autonomie. Deux scénarios au choix selon ton setup (Node ou dépôt Git seul).
+> **Bloc 5 · Leçon 8** — Exercice à faire en autonomie. Deux scénarios au choix selon ton setup (Node ou dépôt Git seul).
 
 ---
 

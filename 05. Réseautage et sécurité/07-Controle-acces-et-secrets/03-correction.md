@@ -1,6 +1,6 @@
-# Correction — Leçon 6 : Contrôle d'accès et secrets
+# Correction — Leçon 7 : Contrôle d'accès et secrets
 
-> **Bloc 5 · Leçon 6** — Correction pas à pas.
+> **Bloc 5 · Leçon 7** — Correction pas à pas.
 
 ---
 

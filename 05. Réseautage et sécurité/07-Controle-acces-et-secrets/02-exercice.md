@@ -1,6 +1,6 @@
-# Exercice — Leçon 6 : Contrôle d'accès et secrets
+# Exercice — Leçon 7 : Contrôle d'accès et secrets
 
-> **Bloc 5 · Leçon 6** — Exercice à faire en autonomie, tout local (pas de machine distante nécessaire).
+> **Bloc 5 · Leçon 7** — Exercice à faire en autonomie, tout local (pas de machine distante nécessaire).
 
 ---
 

@@ -1,6 +1,6 @@
-# Référence rapide — Leçon 6 : Contrôle d'accès & secrets
+# Référence rapide — Leçon 7 : Contrôle d'accès & secrets
 
-> Bloc 5 · Leçon 6 — Aide-mémoire.
+> Bloc 5 · Leçon 7 — Aide-mémoire.
 
 ## Concepts
 - **Authentification** : qui es-tu ? (identité)

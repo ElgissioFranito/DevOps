@@ -1,6 +1,6 @@
-# Exercice — Leçon 5 : Reverse Proxy et Load Balancing
+# Exercice — Leçon 6 : Reverse Proxy et Load Balancing
 
-> **Bloc 5 · Leçon 5** — Exercice à réaliser sur une **machine de test** (VM/WSL/VPS de test) — jamais en production.
+> **Bloc 5 · Leçon 6** — Exercice à réaliser sur une **machine de test** (VM/WSL/VPS de test) — jamais en production.
 
 ---
 

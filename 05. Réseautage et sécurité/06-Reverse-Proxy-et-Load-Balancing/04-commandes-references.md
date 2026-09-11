@@ -1,6 +1,6 @@
-# Référence rapide — Leçon 5 : Reverse Proxy & Load Balancing
+# Référence rapide — Leçon 6 : Reverse Proxy & Load Balancing
 
-> Bloc 5 · Leçon 5 — Aide-mémoire.
+> Bloc 5 · Leçon 6 — Aide-mémoire.
 
 ## Architecture cible
 ```

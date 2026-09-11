@@ -70,7 +70,7 @@ Chaque dossier contient 4 fichiers : `01-lecon.md`, `02-exercice.md`, `03-correc
 | **IGW (Internet Gateway)** | La porte d'entrée/sortie du VPC vers Internet | Leçon 2 |
 | **NAT (Gateway)** | Le relais qui permet aux machines privées de *sortir* sur Internet sans être *accessibles* | Leçon 2 |
 | **Security Group** | Le pare-feu virtuel attaché à chaque ressource (qui peut entrer ?) | Leçon 2 |
-| **VPN** | Tunnel chiffré reliant deux réseaux séparés par Internet comme s'ils étaient adjacents | Leçon 2 |
+| **VPN** | Tunnel chiffré reliant deux réseaux séparés par Internet comme s'ils étaient adjacents (montage pratique : Bloc 5, Leçon 5) | Leçon 2 |
 | **Bastion** | Petite machine publique servant de porte d'entrée vers les machines privées (alternative au VPN) | Leçon 2 |
 | **EC2** | Le service de VM d'AWS (« Elastic Compute Cloud ») | Leçon 3 |
 | **Instance** | Une VM en cours d'exécution | Leçon 3 |

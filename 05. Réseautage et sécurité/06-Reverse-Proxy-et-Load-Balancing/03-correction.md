@@ -1,6 +1,6 @@
-# Correction — Leçon 5 : Reverse Proxy et Load Balancing
+# Correction — Leçon 6 : Reverse Proxy et Load Balancing
 
-> **Bloc 5 · Leçon 5** — Correction pas à pas.
+> **Bloc 5 · Leçon 6** — Correction pas à pas.
 
 ---
 

@@ -130,7 +130,7 @@ psql -h MON_ENDPOINT.rds.amazonaws.com -p 5432 -U admin -d postgres
 # (on te demandera le mot de passe créé avec --master-user-password)
 ```
 
-> 📌 **Important** : pour te connecter à une RDS, ton **ordinateur** doit être dans un réseau autorisé par le security group / la politique d'accès du subnet (Leçon 2). En production, l'application se connecte **depuis le subnet privé** ; ton poste ne s'y connecte que via un **bastion** ou un **VPN** (vu en Leçon 2) — jamais en exposant la base sur Internet.
+> 📌 **Important** : pour te connecter à une RDS, ton **ordinateur** doit être dans un réseau autorisé par le security group / la politique d'accès du subnet (Leçon 2). En production, l'application se connecte **depuis le subnet privé** ; ton poste ne s'y connecte que via un **bastion** ou un **VPN** (présentés en Leçon 2 ; le VPN WireGuard/OpenVPN se construit au **Bloc 5, Leçon 5**) — jamais en exposant la base sur Internet.
 
 ### 3.2 Alternative locale gratuite : PostgreSQL sur ta machine
 

@@ -3,7 +3,7 @@
 > **À lire en premier**, avant la Leçon 1. Ce fichier te dit :
 > - de quoi parle ce bloc et **pourquoi il est central en DevOps**,
 > - ce qu'il te faut **préparer** avant de commencer,
-> - les **7 leçons** du bloc et le **fil rouge** qui les relie,
+> - les **8 leçons** du bloc et le **fil rouge** qui les relie,
 > - le vocabulaire que tu vas croiser, et ce que tu sauras faire à la fin.
 
 ---
@@ -27,12 +27,12 @@ Objectif de la roadmap : *« un problème réseau ne te paraît plus magique »*
 
 - **Les Blocs 01-04** : le parcours « du Git à la production » (Bloc 01) et les blocs Linux/scripting. Le schéma `DNS → IP → port → service` y a été évoqué : on l'approfondit ici.
 - **Une machine de test** : VM (ex. VirtualBox) ou WSL ou VPS de test — pour les leçons pare-feu et reverse proxy. **Jamais** une machine de production.
-- **Outils à installer en cours de route** (chaque leçon le précise) : `curl`, `dig`/`dnsutils`, `openssl`, `ufw`, `nginx`. Sur Ubuntu/WSL, la plupart sont déjà là ou s'installent via `apt`.
+- **Outils à installer en cours de route** (chaque leçon le précise) : `curl`, `dig`/`dnsutils`, `openssl`, `ufw`, `nginx`, puis `wireguard-tools` et `openvpn` (Leçon 5). Sur Ubuntu/WSL, la plupart sont déjà là ou s'installent via `apt`.
 - **Un éditeur** : `nano` (suffit) ou VS Code.
 
 ---
 
-## 🗺️ Les 7 leçons du bloc (et le fil rouge)
+## 🗺️ Les 8 leçons du bloc (et le fil rouge)
 
 Le **fil rouge** : *« comprendre pourquoi une application (frontend Angular + backend Spring Boot + base PostgreSQL) est accessible ou pas — et comment la sécuriser »* (le schéma de la roadmap section 5).
 
@@ -42,9 +42,10 @@ Le **fil rouge** : *« comprendre pourquoi une application (frontend Angular + b
 | 2 | Adressage IP et diagnostic | IP, CIDR, subnet, gateway, privée/publique ; `ping`/`traceroute`/`ip` |
 | 3 | Pare-feu et contrôle des flux | UFW, open/filtré, défaut-deny, moindre exposition, L3/L4/L7 |
 | 4 | TLS, HTTPS et certificats | Clés, certificats, CA ; `openssl` ; erreurs TLS |
-| 5 | Reverse Proxy et Load Balancing | Nginx, upstream, health check, failover, L4/L7 |
-| 6 | Contrôle d'accès et secrets | Auth vs autorisation, RBAC/ABAC, `.env`, `.gitignore`, coffres |
-| 7 | DevSecOps et Shift-Left | SAST/DAST, dependency/container/secret scan, CVE, pipeline |
+| 5 | VPN et tunnels sécurisés | VPN (à quoi ça sert, usages quotidiens) ; WireGuard, OpenVPN, tunnels SSH ; AllowedIPs, split tunnel |
+| 6 | Reverse Proxy et Load Balancing | Nginx, upstream, health check, failover, L4/L7 |
+| 7 | Contrôle d'accès et secrets | Auth vs autorisation, RBAC/ABAC, `.env`, `.gitignore`, coffres |
+| 8 | DevSecOps et Shift-Left | SAST/DAST, dependency/container/secret scan, CVE, pipeline |
 
 Chaque dossier contient 4 fichiers : `01-lecon.md`, `02-exercice.md`, `03-correction.md`, `04-commandes-references.md`.
 
@@ -63,12 +64,15 @@ Chaque dossier contient 4 fichiers : `01-lecon.md`, `02-exercice.md`, `03-correc
 | **Pare-feu (firewall)** | Le gardien qui filtre les flux | Leçon 3 |
 | **TLS / HTTPS** | Le chiffrement qui protège les échanges | Leçon 4 |
 | **Certificat / CA** | « Carte d'identité » d'un serveur, signée par une autorité | Leçon 4 |
-| **Reverse proxy** | Le point d'entrée unique devant les applications | Leçon 5 |
-| **Load balancer** | Le répartiteur de charge entre serveurs | Leçon 5 |
-| **RBAC / ABAC** | Modèles de contrôle d'accès par rôles / attributs | Leçon 6 |
-| **Secret** | Mot de passe/clé/token à ne jamais committer | Leçon 6 |
-| **DevSecOps / Shift-left** | Intégrer la sécurité tôt dans le cycle | Leçon 7 |
-| **SAST / DAST / CVE** | Familles de scanners / identifiant de faille | Leçon 7 |
+| **VPN / tunnel** | « Conduit secret » chiffré entre ta machine et un réseau distant (Virtual Private Network) | Leçon 5 |
+| **WireGuard / OpenVPN** | Les deux outils VPN à connaître : moderne & simple / vétéran & universel | Leçon 5 |
+| **AllowedIPs / split tunnel** | Les IP routées dans le VPN / mode où seul le trafic choisi passe par le tunnel | Leçon 5 |
+| **Reverse proxy** | Le point d'entrée unique devant les applications | Leçon 6 |
+| **Load balancer** | Le répartiteur de charge entre serveurs | Leçon 6 |
+| **RBAC / ABAC** | Modèles de contrôle d'accès par rôles / attributs | Leçon 7 |
+| **Secret** | Mot de passe/clé/token à ne jamais committer | Leçon 7 |
+| **DevSecOps / Shift-left** | Intégrer la sécurité tôt dans le cycle | Leçon 8 |
+| **SAST / DAST / CVE** | Familles de scanners / identifiant de faille | Leçon 8 |
 
 ---
 
@@ -79,6 +83,7 @@ Tu peux, **de mémoire** :
 - expliquer la **chaîne** `DNS → IP → route → firewall → port → service → application` et identifier où une requête peut être bloquée ;
 - diagnostiquer avec `ping`, `traceroute`, `curl`, `nc`, `dig`, `ip` ;
 - configurer un pare-feu simple (UFW) en respectant le moindre exposition ;
+- monter et tester un tunnel VPN (WireGuard), et expliquer quand l'utiliser (administration à distance, Wi-Fi public, accès à un réseau privé) ;
 - expliquer et manipuler un certificat TLS avec `openssl` ;
 - expliquer pourquoi on place un reverse proxy/load balancer et en écrire une config Nginx simple ;
 - appliquer le moindre privilège et ne jamais committer de secret ;

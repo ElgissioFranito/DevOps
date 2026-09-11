@@ -737,7 +737,7 @@ Exemple :
 
 > 🔵 **À mentionner, définir, ne pas creuser — IPv6** : la version plus récente d'IPv4, avec un espace d'adressage bien plus grand (adresses en hexadécimal, ex. `2001:db8::1`). La plupart des infrastructures actuelles fonctionnent encore majoritairement en IPv4 ; IPv6 est bon à reconnaître, pas urgent à maîtriser.
 >
-> 🔵 **À mentionner, définir, ne pas creuser — IPSec** : suite de protocoles permettant de chiffrer/authentifier le trafic IP, utilisée notamment pour monter des VPN site-à-site. À connaître de nom si tu croises une configuration VPN d'entreprise.
+> 🔵 **À mentionner, définir, ne pas creuser — IPSec** : suite de protocoles permettant de chiffrer/authentifier le trafic IP, utilisée notamment pour monter des VPN site-à-site. À connaître de nom si tu croises une configuration VPN d'entreprise ; ces tunnels sont montrés en pratique dans la leçon « VPN et tunnels sécurisés » ci-dessous (WireGuard/OpenVPN).
 
 ### Pare-feu
 
@@ -755,6 +755,44 @@ Port 22  → autorisé
 Port 5432 → bloqué
 ```
 ---
+
+### VPN et tunnels sécurisés
+
+**VPN (Virtual Private Network)** = tunnel chiffré entre ta machine et un réseau distant : tu circules dedans comme dans un réseau privé local, alors que le transport passe par Internet.
+
+```
+Ta machine ════ tunnel chiffré (VPN) ════> Serveur / réseau distant
+```
+
+#### 🎯 Objectif final
+
+Savoir monter et utiliser un VPN **au quotidien** (ordinateur, téléphone, serveurs) avec WireGuard, et savoir choisir entre WireGuard, OpenVPN et un simple tunnel SSH.
+
+#### 📚 Ce que tu dois connaître
+
+- VPN, tunnel, interface virtuelle (`wg0`, `tun0`)
+- **WireGuard** : clés (`wg genkey`/`wg pubkey`), `AllowedIPs`, `wg-quick`, split tunnel vs full tunnel, `PersistentKeepalive`
+- **OpenVPN** : PKI à base de certificats (lien avec la section TLS)
+- **Tunnels SSH** : `ssh -L` (local), `-R` (distant), `-D` (proxy SOCKS) — pour un besoin ponctuel
+- Usages quotidiens : Wi-Fi public, administration à distance sans exposer SSH, homelab, accès à un réseau privé (y compris un VPC cloud, voir Bloc 6)
+
+#### 🧠 Jargon expliqué
+
+**Tunnel** = canal chiffré qui « emballe » ton trafic pour le faire traverser Internet sans être lisible.
+
+**Split tunnel** = seul une partie du trafic (le réseau privé) passe par le VPN ; le reste sort normalement.
+
+**Full tunnel** = tout le trafic passe par le VPN (ex. Wi-Fi public non fiable).
+
+**Fuite DNS** = les requêtes de noms de domaine sortent en clair malgré le VPN.
+
+#### 🛠️ Ce que tu dois savoir faire concrètement
+
+Générer des clés, écrire une config serveur et une config client (`wg0.conf`), ouvrir le port VPN au pare-feu, démarrer le tunnel, le vérifier (`wg show`, `ping`) et le rendre persistant (`systemctl enable wg-quick@wg0`).
+
+#### ✅ Critère pour considérer le point acquis
+
+Tu peux monter un tunnel WireGuard (serveur + client) de zéro, expliquer tes `AllowedIPs`, et dire quand préférer SSH (ponctuel) ou OpenVPN (compatibilité).
 
 ### Reverse Proxy et Load Balancing
 

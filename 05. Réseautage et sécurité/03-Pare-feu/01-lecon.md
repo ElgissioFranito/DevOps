@@ -1,6 +1,6 @@
 # Leçon 3 — Pare-feu et contrôle des flux
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 3 sur 7
+> **Bloc 5 · Réseautage et sécurité** — Leçon 3 sur 8
 > 🧭 **Pont depuis la Leçon 2** : tu sais adresser et diagnostiquer. Mais « joignable » n'est pas « autorisé » : entre Internet et ton application, il y a un **gardien** — le **pare-feu** (firewall). Cette leçon te montre son rôle et comment le configurer en pratique avec **UFW** (simple) et comprendre le principe de **iptables/nftables** (solide).
 
 ---

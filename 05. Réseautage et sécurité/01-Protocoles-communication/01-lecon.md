@@ -1,6 +1,6 @@
 # Leçon 1 — Protocoles de communication (TCP, UDP, HTTP, HTTPS, DNS, SSH)
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 1 sur 7
+> **Bloc 5 · Réseautage et sécurité** — Leçon 1 sur 8
 > 🧭 **Bienvenue dans le bloc 5 !** (Si ce n'est pas déjà fait, lis d'abord `00-Introduction-Bloc.md`.) Tu sais déjà créer des commits (Bloc 4) et automatiser sur Linux (Blocs 2-3). Dans ce bloc, on répond à la question que tout DevOps se pose chaque jour : **comment deux machines « se parlent » ?** et **pourquoi une application est-elle accessible ou non ?** Cette leçon pose les fondations : les **protocoles**.
 
 ---

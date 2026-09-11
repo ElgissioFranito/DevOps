@@ -1,7 +1,7 @@
-# Leçon 5 — Reverse Proxy et Load Balancing
+# Leçon 6 — Reverse Proxy et Load Balancing
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 5 sur 7
-> 🧭 **Pont depuis les Leçons 1-4** : tu sais faire circuler les données (protocoles), adresser (IP), filtrer (pare-feu) et chiffrer (TLS). Mais dans une app web réelle (frontend **Angular**, backend **Spring Boot**, base **PostgreSQL**), on n'expose **jamais** chaque port au public. On place **un seul point d'entrée** devant : le **reverse proxy**, capable aussi de **répartir la charge** (load balancing). C'est ce qu'on construit ici avec **Nginx**.
+> **Bloc 5 · Réseautage et sécurité** — Leçon 6 sur 8
+> 🧭 **Pont depuis les Leçons 1-5** : tu sais faire circuler les données (protocoles), adresser (IP), filtrer (pare-feu), chiffrer (TLS) et **joindre des réseaux distants en privé via un tunnel (VPN, Leçon 5)**. Mais dans une app web réelle (frontend **Angular**, backend **Spring Boot**, base **PostgreSQL**), on n'expose **jamais** chaque port au public. On place **un seul point d'entrée** devant : le **reverse proxy**, capable aussi de **répartir la charge** (load balancing). C'est ce qu'on construit ici avec **Nginx**.
 > 👉 C'est l'architecture cible de la roadmap : `Internet → Nginx → Angular (front) / Spring Boot (backend) → PostgreSQL`.
 
 ---
@@ -246,8 +246,8 @@ for i in 1 2 3 4; do curl -s http://localhost/api/who; echo; done
 
 ---
 
-🧭 **Pont vers la suite** — Nous savons maintenant **exposer** une app proprement (proxy, LB) et contrôler qui peut la joindre. Mais savoir *qui a le droit de faire quoi* dans un système (utilisateurs, rôles, clés) et **ne pas fuiter de secrets** est un autre pilier : c'est la Leçon 6, **contrôle d'accès et secrets**.
+🧭 **Pont vers la suite** — Nous savons maintenant **exposer** une app proprement (proxy, LB) et contrôler qui peut la joindre. Mais savoir *qui a le droit de faire quoi* dans un système (utilisateurs, rôles, clés) et **ne pas fuiter de secrets** est un autre pilier : c'est la Leçon 7, **contrôle d'accès et secrets**.
 
 ---
 
-*Prochaine étape :* Leçon 6 — **Contrôle d'accès et secrets** dans `06-Controle-acces-et-secrets`.
+*Prochaine étape :* Leçon 7 — **Contrôle d'accès et secrets** dans `07-Controle-acces-et-secrets`.

@@ -1,7 +1,7 @@
-# Leçon 7 — DevSecOps et Shift-Left
+# Leçon 8 — DevSecOps et Shift-Left
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 7 sur 7
-> 🧭 **Pont depuis les Leçons 1-6** : tu sais protéger le réseau (pare-feu, TLS), exposer proprement (proxy) et gérer les accès/secrets. Mais **la sécurité la plus efficace se joue tôt, dès le code** : on l'appelle le **shift-left** (déplacer le plus tôt possible). Cette leçon t'ouvre au **DevSecOps** : intégrer la sécurité tout au long du cycle de vie, avant que le code aille en production.
+> **Bloc 5 · Réseautage et sécurité** — Leçon 8 sur 8
+> 🧭 **Pont depuis les Leçons 1-7** : tu sais protéger le réseau (pare-feu, TLS), exposer proprement (proxy) et gérer les accès/secrets. Mais **la sécurité la plus efficace se joue tôt, dès le code** : on l'appelle le **shift-left** (déplacer le plus tôt possible). Cette leçon t'ouvre au **DevSecOps** : intégrer la sécurité tout au long du cycle de vie, avant que le code aille en production.
 > 👉 C'est la dernière pierre du bloc et le pont naturel vers les blocs Docker (9) et CI/CD (11), qui mettront ces idées en pratique.
 
 ---
@@ -179,7 +179,7 @@ Le but : **empêcher** qu'une version vulnérable atteigne la production.
 - **Scanner tôt et souvent** : SAST dès le commit, pas seulement avant la mise en prod.
 - **Cumuler les scans** : chaque type (code, dépendances, image) couvre une surface différente.
 - **Blocage sur criticité** : échouer le pipeline sur une vulnérabilité **critique** (Critical) ; faire un tri sur les non-bloquantes.
-- **Zéro secret dans Git** : secret scanning à chaque push (rappel Leçon 6).
+- **Zéro secret dans Git** : secret scanning à chaque push (rappel Leçon 7).
 - **Tirer les alertes à jour** (Dependabot / Renovate) pour patcher vite, avant exploitation (l'exemple Log4j l'a montré brutalement).
 - **Patcher rapidement les CVE actives en production** (leçon retenue de Log4j).
 - **Automatiser** : la sécurité manuelle ne tient pas la cadence DevOps.
