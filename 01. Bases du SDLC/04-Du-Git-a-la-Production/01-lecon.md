@@ -5,7 +5,7 @@
 
 ---
 
-#### 1. Objectifs d'apprentissage
+## 1. Objectifs d'apprentissage
 
 À la fin de cette leçon, tu seras capable de :
 
@@ -17,9 +17,9 @@
 
 ---
 
-#### 2. Explication simple
+## 2. Explication simple
 
-##### Le « pourquoi » : réunir toutes les pièces
+### Le « pourquoi » : réunir toutes les pièces
 
 Dans la roadmap, le critère pour valider le bloc 1 est : *« Tu peux expliquer sans hésiter comment ton code passe de ton ordinateur jusqu'au serveur de production. »*
 
@@ -39,7 +39,7 @@ Deployment   (L2-L3)       ← envoyer l'artifact sur un environnement
 Production   (L1-L3)       ← les vrais utilisateurs
 ```
 
-##### Le « comment » : le parcours pas à pas
+### Le « comment » : le parcours pas à pas
 
 1. **Git** : je pousse mon code (dans une branche) vers un dépôt Git central. Le code est le **point d'entrée** : tout part de lui.
 2. **Build** : depuis le code, une commande automatise la transformation en artifact (ex. `mvn clean package` → `.jar`).
@@ -48,20 +48,35 @@ Production   (L1-L3)       ← les vrais utilisateurs
 5. **Déploiement** : on installe l'artifact sur staging, on valide, puis **le même artifact** est promu en production.
 6. **Production + Monitoring** : les vrais utilisateurs y accèdent. On surveille (L1 boucle de feedback).
 
-##### Un point crucial : « le même artifact »
+### Un point crucial : « le même artifact »
 
 Le grand principe DevOps moderne : **on déploie en production l'exact même artifact qui a été validé en staging**. On ne **re-construit** pas le code sur la machine de prod — sinon le résultat pourrait être différent (« ça marchait sur mon PC ») et l'incertitude revient.
 
 > 💡 **Analogie** : c'est comme la recette d'un plat livré. Tu ne refais pas la cuisine dans chacun des restaurants de service : tu livres le plat **préparé à l'avance et validé** par dégustation en cuisine d'essai.
 
-##### La différence entre développement et production
+### La différence entre développement et production
 
 - **Développement** : sur mon ordinateur, code, tests rapides, tout peut casser.
 - **Production** : sur un serveur partagé, artifact validé, vrais utilisateurs, vraies données → on est **prudent** : on déploie l'artifact qui a déjà fonctionné.
 
 ---
 
-#### 3. Exemples concrets
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Git** | l'outil qui versionne le code ( Bloc 4 : tu le maîtriseras) |
+| **Dépôt (repository)** | l'endroit où vit le code versionné (local ou GitHub) |
+| **Build** | transformation du code en artifact (Maven, npm…) |
+| **Artifact** | le livrable déployable (`.jar`, bundle…) |
+| **Déploiement** | installation/exécution de l'artifact sur un serveur |
+| **Environnement** | dev / staging / production (Leçon 3) |
+| **Rollback** | revenir à la version précédente quand un déploiement tourne mal |
+| **Pipeline** | chaîne automatisée : build → tests → déploiement (Bloc 11) |
+
+---
+
+## 3. Exemples concrets
 
 > ⚠️ **Inutile d'installer quoi que ce soit ni d'exécuter ces commandes maintenant.** Ce bloc est **100 % conceptuel**. Les commandes ci-dessous servent uniquement à **voir concrètement** le parcours que tu viens de comprendre. Tout sera refait proprement et expliqué quand tu auras les outils :
 > - **Git** (`git add`, `commit`, `push`) → Bloc 04 « Git ».
@@ -71,7 +86,7 @@ Le grand principe DevOps moderne : **on déploie en production l'exact même art
 
 > 🧠 **Mini-glossaire des commandes d'exemple** : *`git add .`* = prépare les fichiers modifiés ; *`git commit -m "..."`* = enregistre une version ; *`git push`* = envoie la version vers le dépôt Git ; *`mvn clean package`* = compile et génère l'`.jar` ; *`npm run build`* = génère le dossier de fichiers web ; *`scp`* = copie un fichier vers un serveur distant ; *`ssh`* = se connecte au serveur distant ; *`curl`* = interroge une adresse web pour vérifier.
 
-##### Exemple 1 — Le parcours complet (Spring Boot / Maven)
+### Exemple 1 — Le parcours complet (Spring Boot / Maven)
 
 ```bash
 # 1) GIT — je pousse mon code
@@ -104,7 +119,7 @@ curl http://exemple.com/health/ping   # → PONG (les vrais utilisateurs servis)
 
 > ⚠️ Les commandes `scp`/`ssh` manuelles ci-dessus sont **pédagogiques** : dans la réalité moderne, ce déploiement est **automatisé** (pipeline CI/CD, bloc 11). L'objectif ici : comprendre l'**ordre logique** des étapes.
 
-##### Exemple 2 — La même chose pour une app Node / NestJS
+### Exemple 2 — La même chose pour une app Node / NestJS
 
 ```bash
 git add . && git commit -m "Panier" && git push origin main   # GIT
@@ -114,7 +129,7 @@ npx tar -czf mon-app.tgz dist                                  # ARTIFACT (archi
 # déploie l'artifact en staging, valide, puis le même en prod
 ```
 
-##### Exemple 3 — Le schéma mental à retenir (à savoir redessiner)
+### Exemple 3 — Le schéma mental à retenir (à savoir redessiner)
 
 ```text
 GIT ──► BUILD ──► TESTS ──► ARTIFACT ──► DEPLOY(STAGING) ──► DEPLOY(PROD) ──► MONITOR
@@ -124,7 +139,7 @@ GIT ──► BUILD ──► TESTS ──► ARTIFACT ──► DEPLOY(STAGING)
 
 ---
 
-#### 4. Bonnes pratiques modernes (2025-2026)
+## 4. Bonnes pratiques modernes (2025-2026)
 
 1. **Tout part de Git** : le code est versionné, le déploiement se fait à partir de Git (idéalement au bloc 13 GitOps).
 2. **Déployer le même artifact** de staging vers production (reproductibilité).
@@ -137,7 +152,7 @@ GIT ──► BUILD ──► TESTS ──► ARTIFACT ──► DEPLOY(STAGING)
 
 ---
 
-#### 5. Pièges à éviter
+## 5. Pièges à éviter
 
 | ❌ Anti-pattern | ⚠️ Pourquoi c'est dangereux | ✅ Version correcte |
 |----------------|------------------------------|----------------------|
@@ -149,7 +164,7 @@ GIT ──► BUILD ──► TESTS ──► ARTIFACT ──► DEPLOY(STAGING)
 
 ---
 
-#### 6. Exercice pratique
+## 6. Exercice pratique
 
 > ⚠️ L'exercice détaillé est dans **`02-exercice.md`** et la correction dans **`03-correction.md`**.
 
@@ -163,7 +178,7 @@ GIT ──► BUILD ──► TESTS ──► ARTIFACT ──► DEPLOY(STAGING)
 
 ---
 
-#### 7. Correction détaillée de l'exercice
+## 7. Correction détaillée de l'exercice
 
 > La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement attendu :
 
@@ -173,7 +188,7 @@ GIT ──► BUILD ──► TESTS ──► ARTIFACT ──► DEPLOY(STAGING)
 
 ---
 
-#### 8. Checklist de validation
+## 8. Checklist de validation
 
 Coche chaque case que tu réussis :
 

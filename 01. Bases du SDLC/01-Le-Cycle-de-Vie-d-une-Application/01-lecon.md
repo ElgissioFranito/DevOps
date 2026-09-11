@@ -6,7 +6,7 @@
 
 ---
 
-#### 1. Objectifs d'apprentissage
+## 1. Objectifs d'apprentissage
 
 À la fin de cette leçon, tu seras capable de :
 
@@ -19,9 +19,9 @@
 
 ---
 
-#### 2. Explication simple
+## 2. Explication simple
 
-##### Le « pourquoi » : pourquoi existe-t-il un cycle de vie ?
+### Le « pourquoi » : pourquoi existe-t-il un cycle de vie ?
 
 Imagine que tu construis une maison. Tu ne poses pas le toit avant les fondations, n'est-ce pas ? Tu passes par des étapes ordonnées : comprendre le besoin (une maison de 3 pièces ?), dessiner les plans, bâtir, vérifier la solidité, puis emménager et entretenir.
 
@@ -29,7 +29,7 @@ Un logiciel, c'est pareil. Le **SDLC** est le **chemin obligatoire** qu'une appl
 
 > 💡 **DevOps en une phrase** : si le SDLC est *le parcours*, le **DevOps** est la *façon de conduire et d'automatiser ce parcours* (outils, automatisation, collaboration, feedback rapide). On ne peut pas faire de DevOps sans comprendre le SDLC.
 
-##### Les 8 phases du cycle de vie
+### Les 8 phases du cycle de vie
 
 Un logiciel passe par **8 phases**, dans l'ordre. C'est le fil rouge que tu retrouveras dans toutes les leçons suivantes (et dans ton exercice). Pas une de plus, pas une de moins — retiens bien ce nombre :
 
@@ -66,7 +66,7 @@ Production, Monitoring & Maintenance
 | **Déploiement** | *On met en service* | On livre les clés, on emménage |
 | **Production & Monitoring & Maintenance** | *Ça tourne toujours bien ?* | La maison est habitée ; on l'entretient, on répare, on ajoute une pièce |
 
-##### Le « comment » : comment ça se passe concrètement ?
+### Le « comment » : comment ça se passe concrètement ?
 
 Dans la réalité moderne, ces étapes **ne sont pas un long fleuve tranquille**. On ne fait pas « tout l'analyse, puis tout le code, puis tous les tests ». On travaille par **petites boucles** : on prend une petite fonctionnalité, on l'analyse, on la code, on la teste, on la déploie, on vérifie, puis on recommence.
 
@@ -85,7 +85,7 @@ Plan ► Code ► Build ► Test ► Release ► Deploy ► Operate ► Monitor
 
 Le **quand** utiliser ce cycle ? **Toujours**, pour la moindre fonctionnalité, dès le premier jour du projet — pas seulement « à la fin » ou « en cas de souci ».
 
-##### En résumé
+### En résumé
 
 - Le **SDLC** = le cycle de vie complet d'un logiciel (8 phases).
 - Le **DevOps loop** = la façon moderne de parcourir ces étapes en boucle rapide et automatisée.
@@ -93,9 +93,24 @@ Le **quand** utiliser ce cycle ? **Toujours**, pour la moindre fonctionnalité, 
 
 ---
 
-#### 3. Exemples concrets
+## 📖 Vocabulaire / Abréviations
 
-##### Exemple 1 — Le parcours d'une application (schéma de référence)
+| Terme | Définition (une ligne) |
+|---|---|
+| **SDLC** (Software Development Life Cycle) | cycle de vie d'un logiciel : de l'idée à la maintenance |
+| **Déploiement (deployment)** | mettre une application en marche sur un serveur |
+| **Build** | transformation du code source en quelque chose d'exécutable |
+| **Artifact** | le résultat du build (ex. un fichier `.jar`) |
+| **Production** | l'environnement utilisé par les vrais utilisateurs |
+| **Maintenance** | corriger, améliorer et surveiller après la mise en service |
+| **Feedback (retour)** | information qui remonte de la production vers l'équipe |
+| **DevOps** | culture + pratiques qui rapprochent développement et exploitation |
+
+---
+
+## 3. Exemples concrets
+
+### Exemple 1 — Le parcours d'une application (schéma de référence)
 
 ```text
 👥 UN BESOIN        « Les clients veulent se connecter à leur espace. »
@@ -118,7 +133,7 @@ Le **quand** utiliser ce cycle ? **Toujours**, pour la moindre fonctionnalité, 
 🩺 MONITORING       On surveille : « tout le monde se connecte sans erreur ? »
 ```
 
-##### Exemple 2 — Visualiser les acteurs du cycle
+### Exemple 2 — Visualiser les acteurs du cycle
 
 Chaque étape est portée par des acteurs (dans une équipe « DevOps » moderne, les rôles se mélangent fortement) :
 
@@ -133,7 +148,7 @@ Monitoring → DevOps / Ops / SRE
 
 > 🧠 **Jargon** : **SRE** = Site Reliability Engineer (« ingénieur fiabilité des sites »), un rôle qui applique le génie logiciel aux opérations. **QA** = Quality Assurance (assurance qualité).
 
-##### Exemple 3 — Question que tu dois savoir poser à chaque étape
+### Exemple 3 — Question que tu dois savoir poser à chaque étape
 
 Un bon réflexe de DevOps est de se demander, pour chaque étape : **« comment je le fais tourner en boucle ? »** Par exemple :
 
@@ -145,7 +160,7 @@ Un bon réflexe de DevOps est de se demander, pour chaque étape : **« comment 
 
 ---
 
-#### 4. Bonnes pratiques modernes (2025-2026)
+## 4. Bonnes pratiques modernes (2025-2026)
 
 Ce qui se fait aujourd'hui dans l'industrie pour « parcourir » le SDLC efficacement :
 
@@ -159,7 +174,7 @@ Ce qui se fait aujourd'hui dans l'industrie pour « parcourir » le SDLC efficac
 
 ---
 
-#### 5. Pièges à éviter
+## 5. Pièges à éviter
 
 | ❌ Anti-pattern | ⚠️ Pourquoi c'est dangereux | ✅ Version correcte |
 |----------------|------------------------------|----------------------|
@@ -171,7 +186,7 @@ Ce qui se fait aujourd'hui dans l'industrie pour « parcourir » le SDLC efficac
 
 ---
 
-#### 6. Exercice pratique
+## 6. Exercice pratique
 
 > ⚠️ L'exercice détaillé et autocontrôlé se trouve dans **`02-exercice.md`**. La correction commentée est dans **`03-correction.md`**. Lis bien **cette leçon avant de passer à l'exercice.**
 
@@ -181,7 +196,7 @@ Tu peux le faire sur papier, dans un fichier `.md`, ou dans un simple document t
 
 ---
 
-#### 7. Correction détaillée de l'exercice
+## 7. Correction détaillée de l'exercice
 
 > La correction complète pas-à-pas est dans **`03-correction.md`**. Voici l'essentiel du raisonnement attendu.
 
@@ -200,7 +215,7 @@ En prenant l'exemple du **panier d'achat** :
 
 ---
 
-#### 8. Checklist de validation
+## 8. Checklist de validation
 
 Coche chaque case que tu réussis :
 

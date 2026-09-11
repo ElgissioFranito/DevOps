@@ -66,6 +66,21 @@ Sur un projet d'équipe, **personne ne pousse directement sur `main`**. On pouss
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Conflit** | deux modifications concurrentes sur les mêmes lignes que Git refuse d'arbitrer |
+| **Marqueurs de conflit** | les repères `<<<<<<<`, `=======`, `>>>>>>>` dans le fichier à résoudre |
+| **Résolution** | choisir/écrire la bonne version, puis `git add` le fichier réconcilié |
+| **Pull Request (PR)** | demande de fusion relue (review) avant d'intégrer dans la branche principale |
+| **Review** | lecture critique des changements par un pair (commentaires, suggestions) |
+| **Approve** | validation de la review, condition pour merger |
+| **Merge commit** | commit spécial qui « noue » deux branches |
+| **CI** | le pipeline qui teste automatiquement chaque PR (Bloc 11) |
+
+---
+
 ## 3. Exemples concrets
 
 > 🧪 On fabrique un vrai conflit entre « toi » et « ton collègue » (le second clone de la Leçon 3).

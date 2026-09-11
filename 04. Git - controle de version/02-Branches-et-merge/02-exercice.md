@@ -34,3 +34,21 @@ Tu rejoins une mini-équipe qui maintient l'outil de diagnostic. La règle de la
 - [ ] `git log --oneline --graph --all` montre **un** merge commit (la tâche B) et des lignes sinon.
 - [ ] `git branch` ne liste plus que `main`.
 - [ ] Tu sais dire, pour chaque merge, s'il était fast-forward et pourquoi.
+
+## 🎯 Défi bonus (sans clavier — à faire de tête)
+
+1. **Arbre mental** : dessine l'arbre de commits suivant et indique où pointent `main`, `feature-x` et `HEAD` après chaque commande :
+   ```
+   git switch -c feature-x     # depuis main, commit A
+   ... 2 commits (B, C) ...
+   git switch main
+   ... 1 commit (D) ...
+   ```
+2. Que fait `git merge feature-x` depuis `main` ? Même question avec `git rebase main` depuis `feature-x`. Quelle différence sur le graphe ?
+3. **Quiz éclair** (vrai/faux, justifie en une phrase) :
+   - Un merge sans divergence est toujours un fast-forward.
+   - `main` a un statut spécial pour Git.
+   - On peut renommer une branche sans perdre ses commits.
+   - Supprimer une branche supprime ses commits.
+
+> 🧭 Compare ensuite avec `03-correction.md`, puis file à la **Leçon 3** — c'est là que Git devient un outil d'équipe (remote, push, pull).

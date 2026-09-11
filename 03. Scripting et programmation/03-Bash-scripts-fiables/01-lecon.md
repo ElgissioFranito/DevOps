@@ -44,6 +44,21 @@ Oui, **tous tes scripts**, dès la première version. Ces trois options sont le 
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **set -e** | option qui arrête le script dès la première commande en échec |
+| **set -u** | option qui signale l'usage d'une variable non définie |
+| **set -x** | option « mode debug » : affiche chaque commande avant exécution |
+| **Exit code** | code de retour d'une commande (0 = succès, autre = échec) — `$?` le lit |
+| **Idempotence** | propriété d'un script que l'on peut relire plusieurs fois sans effet de bord |
+| **Log / journalisation** | écriture d'événements dans un fichier pour comprendre ce qui s'est passé |
+| **shellcheck** | linter (correcteur statique) qui détecte les erreurs courantes des scripts Bash |
+| **Trap** | mécanisme pour exécuter du nettoyage quand le script s'interrompt |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Jeu complet en tête de script

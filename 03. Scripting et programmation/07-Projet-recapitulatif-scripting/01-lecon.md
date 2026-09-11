@@ -68,6 +68,20 @@ La roadmap cible 5 vérifications qui couvrent l'essentiel d'un diagnostic de ba
 | Rapport | (consolidation) | synthèse lisible + code de sortie |
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **CLI** (Command Line Interface) | outil en ligne de commande (vs interface graphique) |
+| **Argument / option** | ce que l'utilisateur tape après le nom du script (`--verbose`, un chemin…) |
+| **stdin / stdout** | entrée / sortie standard : les « tuyaux » d'un programme (Bloc 2, Leçon 2) |
+| **Code de retour** | 0 = succès, autre = échec — permet aux pipelines de réagir |
+| **Test automatisé** | script qui vérifie qu'un autre script fait bien son travail |
+| **README** | fichier d'explication d'un projet : comment l'installer, l'utiliser |
+| **Refactorisation** | réorganiser le code (fonctions propres) sans changer son comportement |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Le squelette et les helpers

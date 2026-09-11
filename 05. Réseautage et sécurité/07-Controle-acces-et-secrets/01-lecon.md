@@ -128,6 +128,21 @@ git check-ignore .env && echo "OK : .env est protégé"
 - **Ordre crucial** : on met le `.gitignore` **avant** d'ajouter quoi que ce soit — sinon on risque de committer le secret par mégarde.
 
 ---
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Authentification (AuthN)** | vérifier QUI tu es (mot de passe, clé, token) |
+| **Autorisation (AuthZ)** | vérifier CE QUE tu peux faire (droits) |
+| **RBAC** (Role-Based Access Control) | droits attribués via des rôles (admin, lecteur…) |
+| **ABAC** (Attribute-Based Access Control) | droits évalués par attributs (département, heure…) |
+| **Moindre privilège** | n'accorder que le strict nécessaire |
+| **Secret** | mot de passe, clé ou token à ne jamais committer dans Git |
+| **Coffre à secrets (Vault, AWS Secrets Manager)** | outil spécialisé pour stocker/auditer les secrets |
+| **Rotation** | changer régulièrement un secret et révoquer l'ancien |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Un `.env` local (à ne jamais committer)

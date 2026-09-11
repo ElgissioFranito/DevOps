@@ -102,4 +102,12 @@ git branch -d docs/correction-commentaire
 
 ---
 
+### 🎯 Corrigé express du défi bonus
+
+1. **Arbre mental** : après les commandes, `main` → D, `feature-x` → C, `HEAD` → main. Historique : `A ← B ← C` (feature) et `A ← D` (main).
+2. `git merge feature-x` depuis `main` : les branches ont divergé → **commit de fusion** à deux parents (E). `git rebase main` depuis `feature-x` : B et C sont **rejoués** après D (nouveaux hash B′, C′) → historique linéaire.
+3. Quiz : **Vrai** (pas de divergence → Git fait juste avancer le pointeur) · **Faux** (convention, pas de mécanisme interne) · **Vrai** (`git branch -m`, les commits restent) · **Faux** (seul le pointeur disparaît ; les commits restent récupérables jusqu'au nettoyage interne de Git).
+
+---
+
 *Prochaine étape :* Leçon 3 — **Travailler avec un remote** dans `03-Travailler-avec-un-remote/`.

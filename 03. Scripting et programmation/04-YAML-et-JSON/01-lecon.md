@@ -70,6 +70,21 @@ ports:
 - **JSON** quand des **programmes** échangent de la donnée (réponses d'API REST, sorties d'outils). Plus sûr à parser, sans ambiguïté d'indentation.
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **YAML** | format texte lisible par indentation pour la configuration (Compose, Kubernetes) |
+| **JSON** | format d'échange de données avec accolades/crochets, très utilisé par les API |
+| **Indentation** | décalage en espaces qui structure un fichier YAML (2 espaces par niveau) |
+| **Clé / valeur** | couple `nom: valeur` — la brique de base de YAML et JSON |
+| **Liste** | suite d'éléments (tirets `-` en YAML, `[ ]` en JSON) |
+| **Sérialisation** | transformer un objet en texte (et inversement) pour le stocker/l'envoyer |
+| **API** | interface par laquelle deux programmes se parlent (souvent en JSON) |
+| **curl** | outil en ligne de commande pour appeler des services (et voir du JSON brut) |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Écrire du YAML proprement (exemple docker-compose)

@@ -74,6 +74,21 @@ a ── b               m ──►    ← main, après le merge
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Branche** | une ligne de développement parallèle (un « univers » de commits) |
+| **main / master** | le nom usuel de la branche principale |
+| **Merge** | fusionner les changements d'une branche dans une autre |
+| **Conflit** | deux modifications incompatibles que Git refuse de trancher seul |
+| **Fast-forward** | merge sans divergence : la branche avance simplement |
+| **git switch / checkout** | changer de branche (ou revenir à un état antérieur) |
+| **git log --graph** | visualiser les branches comme un arbre |
+| **Branche de fonctionnalité (feature branch)** | branche créée pour UNE tâche, fusionnée une fois finie |
+
+---
+
 ## 3. Exemples concrets
 
 > 🧪 Toujours sur ton dépôt `outil-diagnostic` (ou refais le setup de la Leçon 1 en 1 minute).

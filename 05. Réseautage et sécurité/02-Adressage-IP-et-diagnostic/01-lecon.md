@@ -100,6 +100,21 @@ traceroute -m 5 example.com   # les routeurs traversés (5 sauts max)
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **IPv4 / IPv6** | format d'adresse 32 bits (`192.168.1.10`) / 128 bits (hexadécimal) |
+| **CIDR** | notation d'une plage d'adresses (`/24` = 256 adresses) |
+| **Masque de sous-réseau** | l'ancienne écriture du CIDR (`255.255.255.0` = `/24`) |
+| **Subnet (sous-réseau)** | groupe d'adresses qui se voient sans passer par un routeur |
+| **Gateway (passerelle)** | le routeur par lequel sort le trafic vers d'autres réseaux |
+| **IP privée / publique** | adresse interne au réseau / joignable depuis tout Internet |
+| **Loopback (127.0.0.1, localhost)** | « moi-même » : adresse pour se joindre soi-même |
+| **ICMP** | protocole de diagnostic utilisé par `ping` et `traceroute` |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Voir ton adressage

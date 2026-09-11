@@ -60,6 +60,21 @@ Tu es à moitié sur une modification, il faut urgemment corriger un bug sur une
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Rebase** | rejouer tes commits par-dessus une autre branche (historique linéaire) |
+| **Stash** | rangé temporaire : met de côté tes modifications non commitées |
+| **Squash** | regrouper plusieurs commits en un seul (historique propre) |
+| **Force push** (`--force`) | réécrire l'historique distant — à n'utiliser QUE sur tes branches |
+| **Historique propre** | commits lisibles, un sujet par commit, pas de « fix typo » en série |
+| **Cherry-pick** | copier un commit précis d'une branche à une autre |
+| **Rebase interactif** (`-i`) | rebase où tu choisis : squash, réordonner, éditer… |
+| **Reflog** | le journal de tes déplacements HEAD — le « plan de secours » (Leçon 6) |
+
+---
+
 ## 3. Exemples concrets
 
 > 🧪 Sur `outil-diagnostic`. Assure-toi que tout est commité avant de commencer (`git status` doit être clean).

@@ -49,6 +49,21 @@ Réflexe professionnel : au début de ta journée, `git fetch` puis regarde `git
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Remote** | un dépôt Git distant (GitHub, GitLab…) relié au tien |
+| **origin** | le nom par défaut du remote principal |
+| **Clone** | copier un dépôt distant sur ta machine (avec tout son historique) |
+| **Push** | envoyer tes commits locaux vers le remote |
+| **Pull** | récupérer les commits du remote et les intégrer (= fetch + merge) |
+| **Fetch** | récupérer les nouveautés du remote SANS les intégrer |
+| **Pull Request (PR)** | proposition de fusion relue par d'autres avant intégration (Leçon 5) |
+| **Upstream / tracking** | le lien entre ta branche locale et sa jumelle distante (`-u`) |
+
+---
+
 ## 3. Exemples concrets
 
 > 🧪 On publie ton dépôt `outil-diagnostic` des leçons précédentes. Crée d'abord un dépôt **vide** (sans README) nommé `outil-diagnostic` sur github.com.

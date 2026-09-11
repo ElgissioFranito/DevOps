@@ -60,6 +60,21 @@ requête HTTP --> serveur --> réponse (status + JSON)
 - **Orchestrer** : déclencher un build/une action, récupérer un artefact.
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **subprocess** | module Python qui lance des commandes shell et récupère leur résultat |
+| **returncode** | code de retour d'une commande lancée (0 = succès) |
+| **argparse** | module standard pour gérer les options/arguments d'un script en ligne de commande |
+| **Requests** | bibliothèque populaire pour appeler des API HTTP (hors standard, à installer) |
+| **Cron** | planificateur Linux : exécute une commande à heure fixe (voir Bloc 2) |
+| **Journalisation (logging)** | écrire des événements horodatés pour diagnostiquer ensuite |
+| **Gestion d'erreur** | prévoir le cas « ça échoue » (try/except) au lieu de crasher |
+| **Refactorisation** | améliorer le code sans changer son comportement |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 `subprocess` : lancer une commande et lire sa sortie

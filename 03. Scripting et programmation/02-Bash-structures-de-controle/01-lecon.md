@@ -51,6 +51,21 @@ La commande test est `[ ... ]` (équivalent ancien de la commande `test`) ou [[ 
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Condition** | un test vrai/faux qui décide quelle partie du script exécuter |
+| **if / then / else / fi** | « si… alors… sinon… fin » : la structure de décision en Bash |
+| **Boucle** | répète des commandes (for, while) au lieu de les copier-coller |
+| **for / do / done** | « pour chaque élément… fais… » : boucle sur une liste |
+| **while** | « tant que… fais… » : boucle qui tourne tant qu'une condition est vraie |
+| **`[ ]` (test)** | le crochet qui évalue une condition (`[ -f fichier ]` = le fichier existe ?) |
+| **case / esac** | aiguillage à plusieurs sorties (équivalent du switch) |
+| **Exit code** | code de retour (0 = succès) renvoyé par une commande — testable dans un if |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Conditions avec `[ ]` et `[[ ]]`

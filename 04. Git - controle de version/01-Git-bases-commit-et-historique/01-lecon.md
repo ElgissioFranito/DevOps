@@ -58,6 +58,21 @@ Règle simple : **à chaque fois que tu atteins un état qui fonctionne et qui a
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Git** | logiciel de contrôle de version : enregistre l'historique de tes fichiers |
+| **Dépôt (repository)** | le dossier suivi par Git, avec tout son historique (`.git/`) |
+| **Commit** | un « instantané » signé de tes fichiers, avec message et auteur |
+| **Hash (SHA)** | identifiant unique d'un commit (ex. `a1b2c3d`) |
+| **HEAD** | le pointeur vers l'endroit où tu te trouves dans l'historique |
+| **Stage / index** | la « zone de préparation » entre tes modifications et le commit (`git add`) |
+| **Remote** | un dépôt distant (GitHub…) avec lequel on synchronise (Bloc 4, Leçon 3) |
+| **Working directory** | ton dossier de travail : les fichiers que tu vois et modifies |
+
+---
+
 ## 3. Exemples concrets
 
 > 🧪 Toutes les commandes ci-dessous sont **testables telles quelles**. On démarre le fil rouge : versionner ton outil de diagnostic du Bloc 03.

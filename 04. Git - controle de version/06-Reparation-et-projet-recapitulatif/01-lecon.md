@@ -56,6 +56,21 @@ Git enregistre **chaque déplacement de HEAD** (`reflog`). Même après un `rese
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **git reset** | déplacer HEAD (soft : garde les fichiers, hard : tout écrase) |
+| **git revert** | créer un commit INVERSE (annule en ajoutant, sans réécrire l'historique) |
+| **git commit --amend** | corriger le dernier commit (message ou contenu) |
+| **reflog** | journal des déplacements de HEAD : retrouve un commit « perdu » |
+| **Détaché (detached HEAD)** | être posé sur un commit, pas sur une branche |
+| **Branche orpheline (dangling)** | commit plus référencé par aucune branche — récupérable via reflog |
+| **Rotation (secret)** | révoquer/remplacer une clé exposée (leçon 7 du Bloc 5) |
+| **Clone d'entraînement** | copie du dépôt où l'on casse volontairement des choses |
+
+---
+
 ## 3. Exemples concrets
 
 > 🧪 Sur `outil-diagnostic`. On va casser exprès, puis réparer.

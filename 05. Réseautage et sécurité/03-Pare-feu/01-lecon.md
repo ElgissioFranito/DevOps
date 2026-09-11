@@ -106,6 +106,21 @@ Re-vérifie : `ss -tulpn` montre toujours le port en écoute, mais le pare-feu d
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Pare-feu (firewall)** | le gardien qui décide quels flux réseau sont autorisés ou bloqués |
+| **UFW** | Uncomplicated Firewall : l'interface simple pour gérer le pare-feu Linux |
+| **Défaut-deny** | tout refuser par défaut, n'ouvrir que le nécessaire (moindre exposition) |
+| **Règle** | une ligne du pare-feu : « autoriser/refuser X sur le port Y » |
+| **Port ouvert / filtré** | accessible par tous / silencieux (paquets ignorés) |
+| **Security Group** | l'équivalent du pare-feu dans le cloud (Bloc 6) |
+| **L3 / L4 / L7** | filtrage par adresse / par port+protocole / par contenu applicatif |
+| **Bastion** | petite machine publique servant de porte d'entrée sécurisée |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Activer UFW et régler le défaut deny

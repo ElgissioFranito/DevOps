@@ -98,6 +98,21 @@ echo | openssl s_client -connect example.com:443 2>/dev/null | openssl x509 -noo
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **TLS** (Transport Layer Security) | le protocole qui chiffre les échanges (successeur de SSL) |
+| **HTTPS** | HTTP + TLS : le web chiffré (cadenas du navigateur) |
+| **Chiffrement symétrique / asymétrique** | une même clé des deux côtés / paire publique-privée |
+| **Certificat** | la « carte d'identité » numérique d'un serveur (nom + clé publique + signature) |
+| **CA (Certificate Authority)** | autorité qui signe les certificats (Let's Encrypt) |
+| **Auto-signé** | certificat que le serveur a signé lui-même (parfait en local, alarmant en public) |
+| **Mismatch** | le nom dans le certificat ne correspond pas au site visité |
+| **openssl** | l'outil en ligne de commande pour générer/inspecter clés et certificats |
+
+---
+
 ## 3. Exemples concrets (openssl)
 
 ### 3.1 Inspecter un certificat existant

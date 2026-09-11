@@ -140,6 +140,21 @@ grep -rn "API_KEY\|password" . --exclude-dir=.git
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **DevSecOps** | intégrer la sécurité dans toute la chaîne DevOps (pas seulement à la fin) |
+| **Shift-left** | déplacer les contrôles le plus tôt possible (dès le code) |
+| **SAST** (Static Analysis) | analyse du code source sans l'exécuter |
+| **DAST** (Dynamic Analysis) | analyse d'une application EN COURS d'exécution |
+| **CVE** (Common Vulnerabilities and Exposures) | identifiant mondial d'une faille (ex. CVE-2021-44228) |
+| **Sévérité** | gravité d'une faille : faible, moyenne, élevée, critique |
+| **Dependency scanning** | scan des bibliothèques externes (npm audit) |
+| **Secret scanning** | détection de mots de passe/clés égarés dans le code |
+
+---
+
 ## 3. Exemples concrets (principes, exécutables aux Blocs 9/11)
 
 ### 3.1 Visualiser la chaîne de scans (schéma)

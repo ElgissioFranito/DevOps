@@ -62,6 +62,21 @@ echo "Application relancee"
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Shell** | le programme qui lit et exécute tes commandes (Bash est le plus courant) |
+| **Shebang** (`#!`) | première ligne d'un script indiquant quel interpréteur utiliser (`#!/bin/bash`) |
+| **Script** | fichier texte contenant une suite de commandes exécutables |
+| **Variable** | un « étiquette » qui mémorise une valeur réutilisable (`NOM="toto"`, puis `$NOM`) |
+| **Argument** (`$1`, `$2`) | valeur passée au script au lancement : `./mon-script.sh arg1` |
+| **echo** | commande qui affiche du texte (le « print » du shell) |
+| **chmod +x** | rend un fichier exécutable (lancable par son nom) |
+| **Commentaire** (`#`) | ligne ignorée par le shell, uniquement pour les humains |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Le premier script

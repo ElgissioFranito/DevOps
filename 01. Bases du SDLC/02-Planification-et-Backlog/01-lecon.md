@@ -5,7 +5,7 @@
 
 ---
 
-#### 1. Objectifs d'apprentissage
+## 1. Objectifs d'apprentissage
 
 À la fin de cette leçon, tu seras capable de :
 
@@ -18,9 +18,9 @@
 
 ---
 
-#### 2. Explication simple
+## 2. Explication simple
 
-##### Le « pourquoi » : pourquoi planifier avant de coder ?
+### Le « pourquoi » : pourquoi planifier avant de coder ?
 
 Dans la Leçon 1, on a vu que la première étape du cycle est l'**analyse du besoin**. Mais un projet a souvent **des dizaines, voire des centaines** de besoins. Impossible de tout coder d'un coup : il faut **organiser**, **classer** et **choisir quoi faire en premier**.
 
@@ -28,7 +28,7 @@ Le **backlog** est cette liste de travail à faire. C'est l'outil qui transforme
 
 > 💡 **Analogie** : le backlog, c'est la **liste de courses du projet**. Sans liste, tu remplis ton caddie n'importe comment, tu oublies des choses essentielles et tu achètes des trucs dont tu n'as pas besoin. Avec une liste bien priorisée, tu sais exactement quoi prendre et dans quel ordre.
 
-##### Le « comment » : les pièces du backlog
+### Le « comment » : les pièces du backlog
 
 Un backlog n'est pas juste une liste de phrases. Chaque élément est **typé** pour qu'on sache quoi faire :
 
@@ -48,7 +48,7 @@ BACKLOG PRODUIT
 └── [User Story] En tant qu'administrateur, je veux exporter la liste des commandes en Excel.
 ```
 
-##### Le « comment » : sprint et priorité
+### Le « comment » : sprint et priorité
 
 - **Sprint** : une période courte et fixe (souvent 1 à 4 semaines) pendant laquelle l'équipe s'engage à livrer un sous-ensemble du backlog. À la fin du sprint, on doit avoir des **résultats utilisables**.
 - **Backlog produit (product backlog)** : toute la liste, à long terme.
@@ -60,7 +60,7 @@ BACKLOG PRODUIT
 
 **Estimer** = donner un ordre de grandeur de la difficulté, pas une date précise. On utilise souvent des **points** (1, 2, 3, 5, 8…) plutôt que des heures, pour rester relatif et simple.
 
-##### Le « quand » : quand planifie-t-on ?
+### Le « quand » : quand planifie-t-on ?
 
 - **En continu** : le backlog est vivant, on l'enrichit et le re-priorise en permanence.
 - **Avant chaque sprint** : on sélectionne, on estime, on découpe.
@@ -68,9 +68,24 @@ BACKLOG PRODUIT
 
 ---
 
-#### 3. Exemples concrets
+## 📖 Vocabulaire / Abréviations
 
-##### Exemple 1 — Écrire une vraie User Story
+| Terme | Définition (une ligne) |
+|---|---|
+| **Backlog** | liste ordonnée de tout ce qu'il faut faire sur un projet |
+| **User Story** | besoin écrit au format « En tant que… je veux… afin de… » |
+| **Tâche** | unité de travail concrète (plus petite qu'une story) |
+| **Bug** | défaut : le logiciel ne se comporte pas comme prévu |
+| **Sprint** | période fixe (ex. 2 semaines) pendant laquelle l'équipe livre un lot |
+| **Priorité** | l'ordre d'importance des éléments du backlog |
+| **Estimation** | approximation de l'effort nécessaire (jours, points) |
+| **MoSCoW** | méthode de priorisation : Must / Should / Could / Won't |
+
+---
+
+## 3. Exemples concrets
+
+### Exemple 1 — Écrire une vraie User Story
 
 Format « En tant que / je veux / afin de » :
 
@@ -84,7 +99,7 @@ La bonne User Story :
 - **un verbe d'action** (supprimer),
 - **un bénéfice** (corriger ma commande).
 
-##### Exemple 2 — Priorisation MoSCoW sur un début de projet
+### Exemple 2 — Priorisation MoSCoW sur un début de projet
 
 ```text
 BACKLOG PRIORISÉ (MoSCoW)
@@ -95,7 +110,7 @@ BACKLOG PRIORISÉ (MoSCoW)
 [W] Thème sombre                        → on garde en tête, pas maintenant
 ```
 
-##### Exemple 3 — Estimation en points (Fibonacci-like)
+### Exemple 3 — Estimation en points (Fibonacci-like)
 
 ```text
 1 point  : petite et évidente (ex. corriger une faute d'orthographe)
@@ -109,7 +124,7 @@ BACKLOG PRIORISÉ (MoSCoW)
 
 ---
 
-#### 4. Bonnes pratiques modernes (2025-2026)
+## 4. Bonnes pratiques modernes (2025-2026)
 
 1. **Écrire des User Stories orientées valeur utilisateur**, courtes (le critère « INVEST ») — pas des descriptions techniques codées.
 2. **Tenir le backlog en ordre permanent** (grooming / refinement régulier), pour que le prochain sprint soit toujours prêt.
@@ -121,7 +136,7 @@ BACKLOG PRIORISÉ (MoSCoW)
 > 🧠 **Jargon** : **INVEST** = acronyme pour une bonne User Story : **I**ndependent, **N**egotiable, **V**aluable, **E**stimable, **S**mall, **T**estable. **Grooming** / **refinement** = moment dédié pour nettoyer et détailler le backlog. **WIP** = Work In Progress (travail en cours).
 ---
 
-#### 5. Pièges à éviter
+## 5. Pièges à éviter
 
 | ❌ Anti-pattern | ⚠️ Pourquoi c'est dangereux | ✅ Version correcte |
 |----------------|------------------------------|----------------------|
@@ -134,7 +149,7 @@ BACKLOG PRIORISÉ (MoSCoW)
 
 ---
 
-#### 6. Exercice pratique
+## 6. Exercice pratique
 
 > ⚠️ L'exercice détaillé est dans **`02-exercice.md`** et la correction dans **`03-correction.md`**.
 
@@ -147,7 +162,7 @@ BACKLOG PRIORISÉ (MoSCoW)
 
 ---
 
-#### 7. Correction détaillée de l'exercice
+## 7. Correction détaillée de l'exercice
 
 > La correction complète pas-à-pas est dans **`03-correction.md`**.
 
@@ -161,7 +176,7 @@ BACKLOG PRIORISÉ (MoSCoW)
 
 ---
 
-#### 8. Checklist de validation
+## 8. Checklist de validation
 
 Coche chaque case que tu réussis :
 

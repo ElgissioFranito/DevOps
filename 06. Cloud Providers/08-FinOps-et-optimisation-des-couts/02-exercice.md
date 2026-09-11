@@ -35,3 +35,11 @@ Identifie les 3 gaspillages les plus probables chez un débutant, et pour chacun
 `notes-exercice-08.md` (sortie du script + 4 postes + 3 gaspillages + plan budget/alerte).
 
 Correction détaillée dans **`03-correction.md`**.
+
+---
+
+## 🎯 Défi bonus (pour aller plus loin)
+
+1. **Jeu des 7 différences** : compare les coûts d'une VM `t3.small` allumée 24/7 vs **allumée 12h/jour** (arrêt la nuit). Estime en % l'économie, puis explique pourquoi `stopped` ne coûte que le disque (rappel Leçon 3 : états running/stopped/terminated).
+2. **Piège des données sortantes** : ton site sert 100 Go/mois depuis S3 vers Internet. Cherche ce qu'est le **trafic sortant (data transfer out)** et pourquoi il est souvent le poste surprise d'une facture AWS.
+3. **Décision** : ton équipe propose de remplacer la VM de dev par une instance **2× plus grosse** « pour aller plus vite ». Quel argument FinOps utilises-tu pour demander une mesure AVANT de payer ? (indice : profil d'utilisation, heures actives, FinOps = informer → optimiser → opérer)

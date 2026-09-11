@@ -5,7 +5,7 @@
 
 ---
 
-#### 1. Objectifs d'apprentissage
+## 1. Objectifs d'apprentissage
 
 À la fin de cette leçon, tu seras capable de :
 
@@ -17,15 +17,15 @@
 
 ---
 
-#### 2. Explication simple
+## 2. Explication simple
 
-##### Les tests : le « pourquoi »
+### Les tests : le « pourquoi »
 
 Reprends la Leçon 1. Entre le développement et le déploiement, il y a une étape indispensable : **vérifier que ça marche**. On a vu qu'un bug coûte ~100× plus cher en production. Les tests sont cette **ceinture de sécurité** qui attrape les erreurs **avant** qu'elles n'atteignent les vrais utilisateurs.
 
 > 💡 **Analogie** : tester, c'est comme vérifier une voiture avant un long trajet. On ne teste pas « tout le trajet » d'un coup : on vérifie chaque mécanisme séparément (les freins), puis on vérifie que freins + direction vont bien ensemble, puis on fait un test complet sur piste avant le grand voyage.
 
-##### Les 3 niveaux de tests
+### Les 3 niveaux de tests
 
 | Niveau | Qu'est-ce qu'on vérifie ? | Échelle | Analogie voiture |
 |--------|---------------------------|---------|------------------|
@@ -33,7 +33,7 @@ Reprends la Leçon 1. Entre le développement et le déploiement, il y a une ét
 | **Test d'intégration** | Que **plusieurs unités fonctionnent ensemble** (code + base + API). | Moyenne, moins rapide | Vérifier que le freinage et la direction agissent ensemble |
 | **Test end-to-end (E2E)** | Le **parcours utilisateur complet**, du clic jusqu'au résultat final, sur l'app la plus proche de la réalité. | Grande, lente, peu nombreux, fragile | Rouler tout le trajet d'essai sur piste réelle |
 
-##### La pyramide des tests
+### La pyramide des tests
 
 Parce que les tests E2E sont **lents et fragiles** (et donc coûteux), on n'en fait pas des milliers. La règle du métier est la **pyramide** :
 
@@ -52,7 +52,7 @@ Parce que les tests E2E sont **lents et fragiles** (et donc coûteux), on n'en f
 
 Si tes tests E2E sont les plus nombreux, c'est un signal d'alerte (pyramide inversée).
 
-##### Les environnements : dev, staging, production
+### Les environnements : dev, staging, production
 
 En plus de *ton* ordinateur (où tu codes), on déploie l'application dans des environnements partagés :
 
@@ -67,7 +67,7 @@ Développeur (PC) → Dev → Staging → Production
 
 > 🧠 **Jargon** : **Staging** = « répétition générale » de la production, en privé, avec de fausses données. Son but est de **réduire au maximum le risque** de casser la production.
 
-##### Build et artifact
+### Build et artifact
 
 - **Build** : la transformation du code source en un **livrable exécutable/déployable**. On compile, on assemble, on optimise.
 - **Artifact** : le **résultat** de ce build (un fichier `.jar`, `.war`, un dossier de build, un conteneur…).
@@ -80,7 +80,7 @@ src/...        ──►  npm run build      ──►  dist/ (fichiers web)
 
 Un même code source, construit de façon reproductible, donne un **artifact identique** — c'est cette reproductibilité qui permet de passer de celui-ci en production sans surprise.
 
-##### Petit lexique des outils cités dans ce bloc
+### Petit lexique des outils cités dans ce bloc
 
 > ℹ️ **Tu n'as pas besoin d'installer ni de maîtriser ces outils maintenant.** Voici simplement de quoi on parle, pour que ces noms ne te surprennent pas quand tu les rencontreras :
 
@@ -96,11 +96,26 @@ Un même code source, construit de façon reproductible, donne un **artifact ide
 
 ---
 
-#### 3. Exemples concrets
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Test unitaire** | vérifie UNE fonction isolée (rapide, très nombreux) |
+| **Test d'intégration** | vérifie que plusieurs briques fonctionnent ensemble |
+| **Test end-to-end (E2E)** | vérifie un parcours utilisateur complet, de bout en bout |
+| **Pyramide des tests** | beaucoup d'unitaires, moins d'intégration, peu d'E2E |
+| **Environnement** | un « monde » d'exécution : dev, staging, production |
+| **Staging** | copie proche de la production pour tester avant de livrer |
+| **Build** | transformation du code en livrable exécutable |
+| **Artifact** | le livrable produit par le build (`.jar`, image Docker…) |
+
+---
+
+## 3. Exemples concrets
 
 > Les commandes **Java/Maven** et **Node** ci-dessous sont données à but pédagogique : tu n'as pas besoin de les exécuter pour comprendre. Elles sont **testables** si tu as l'environnement installé (voir blocs 02/03).
 
-##### Exemple 1 — Un petit test unitaire en Java (JUnit, style Spring/Maven)
+### Exemple 1 — Un petit test unitaire en Java (JUnit, style Spring/Maven)
 
 ```java
 // PanierTest.java
@@ -123,7 +138,7 @@ Lancer :
 mvn test            # Maven : compile + exécute tous les tests unitaires
 ```
 
-##### Exemple 2 — Un test unitaire en Node (Jest, variante NestJS)
+### Exemple 2 — Un test unitaire en Node (Jest, variante NestJS)
 
 ```javascript
 // panier.test.js
@@ -141,7 +156,7 @@ Lancer :
 npm test            # exécute Jest sur les fichiers *.test.js
 ```
 
-##### Exemple 3 — Build & artifact
+### Exemple 3 — Build & artifact
 
 ```bash
 # Java / Maven : construit un .jar déployable dans target/
@@ -153,7 +168,7 @@ npm run build
 # → produit le dossier dist/ (l'ARTIFACT)
 ```
 
-##### Exemple 4 — Vue d'ensemble d'un mini pipeline Dev → Staging → Prod
+### Exemple 4 — Vue d'ensemble d'un mini pipeline Dev → Staging → Prod
 
 ```text
 docker build -t mon-app:1.0 .     # construit l'image (artifact)
@@ -167,7 +182,7 @@ curl -k https://staging.exemple.com/health   # vérifie que la santé est OK
 
 ---
 
-#### 4. Bonnes pratiques modernes (2025-2026)
+## 4. Bonnes pratiques modernes (2025-2026)
 
 1. **Respecter la pyramide des tests** : majorité de tests unitaires, peu d'E2E.
 2. **Tester le plus tôt possible (shift-left)** : écrire les tests **en même temps** que le code, voire d'abord (TDD).
@@ -180,7 +195,7 @@ curl -k https://staging.exemple.com/health   # vérifie que la santé est OK
 
 ---
 
-#### 5. Pièges à éviter
+## 5. Pièges à éviter
 
 | ❌ Anti-pattern | ⚠️ Pourquoi c'est dangereux | ✅ Version correcte |
 |----------------|------------------------------|----------------------|
@@ -192,7 +207,7 @@ curl -k https://staging.exemple.com/health   # vérifie que la santé est OK
 
 ---
 
-#### 6. Exercice pratique
+## 6. Exercice pratique
 
 > ⚠️ L'exercice détaillé est dans **`02-exercice.md`** et la correction dans **`03-correction.md`**.
 
@@ -207,7 +222,7 @@ curl -k https://staging.exemple.com/health   # vérifie que la santé est OK
 
 ---
 
-#### 7. Correction détaillée de l'exercice
+## 7. Correction détaillée de l'exercice
 
 > La correction complète pas-à-pas est dans **`03-correction.md`**. Essentiel du raisonnement montré en **Leçon 3** :
 
@@ -220,7 +235,7 @@ curl -k https://staging.exemple.com/health   # vérifie que la santé est OK
 
 ---
 
-#### 8. Checklist de validation
+## 8. Checklist de validation
 
 Coche chaque case que tu réussis :
 

@@ -61,6 +61,21 @@ print("fin")             # non indenté = hors du if
 | Script volumineux, maintenable, testable | **Python** |
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Interpréteur** | le programme qui exécute ton code Python ligne à ligne (`python3`) |
+| **Module / import** | fichier de fonctions réutilisables, chargé avec `import` |
+| **pip** | le gestionnaire de paquets Python (installe des bibliothèques) |
+| **venv** | environnement virtuel : un « bac à sable » isolant les dépendances d'un projet |
+| **f-string** | chaîne de caractères avec variables intégrées : `f"Bonjour {nom}"` |
+| **REPL** | mode interactif (tu tapes, Python répond) lancé par `python3` sans argument |
+| **Shebang** (`#!/usr/bin/env python3`) | première ligne qui dit au système d'utiliser Python |
+| **Type** | le genre d'une valeur (texte `str`, nombre `int`, liste `list`, booléen `bool`) |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Premier script : variables et `print()`

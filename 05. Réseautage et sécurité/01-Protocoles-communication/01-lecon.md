@@ -140,6 +140,21 @@ Ces trois commandes sont le réflexe n°1 de tout DevOps. Elles te resserviront 
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Protocole** | ensemble de règles pour que deux machines se comprennent |
+| **TCP** | transport fiable (connexion, accusés de réception) — web, SSH |
+| **UDP** | transport rapide sans garantie — DNS, VPN (Leçon 5) |
+| **Port** | numéro (1-65535) désignant le « guichet » d'un service sur une machine |
+| **HTTP / HTTPS** | protocole du web / sa version chiffrée (Leçon 4) |
+| **DNS** | l'annuaire : transforme un nom (`exemple.com`) en adresse IP |
+| **SSH** | connexion à distance sécurisée (Bloc 2, Leçon 5) |
+| **Paquet (packet)** | petit bloc de données qui circule sur le réseau |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 HTTP avec `curl`

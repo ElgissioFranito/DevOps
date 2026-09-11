@@ -124,6 +124,21 @@ curl http://localhost/api/          # doit afficher "Je suis le backend" (via le
 
 ---
 
+## 📖 Vocabulaire / Abréviations
+
+| Terme | Définition (une ligne) |
+|---|---|
+| **Reverse proxy** | serveur placé devant l'app : il reçoit les demandes et les transmet (Nginx) |
+| **Load balancer (LB)** | répartiteur de charge entre plusieurs serveurs identiques |
+| **Upstream** | le groupe de serveurs backend vers lequel Nginx répartit |
+| **Health check** | test périodique qu'un backend est en vie avant de lui envoyer du trafic |
+| **Failover** | bascule automatique vers un autre serveur quand l'un tombe |
+| **Session (affinité)** | garder un même utilisateur sur le même backend |
+| **L4 / L7** | répartition au niveau TCP / au niveau HTTP (plus intelligente) |
+| **Traefik / HAProxy** | alternatives à Nginx pour proxy/équilibrage |
+
+---
+
 ## 3. Exemples concrets
 
 ### 3.1 Servir le frontend + reverse proxy vers le backend (Nginx)
