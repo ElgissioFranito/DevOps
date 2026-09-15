@@ -194,6 +194,34 @@ env:
 
 ---
 
+### 3.4 Comment l'application te reconnaît : session, JWT, OAuth2 (survol)
+
+> 🧭 **Transition** : le RBAC/ABAC ci-dessus dit *ce que tu as le droit de faire* — mais comment l'application sait-elle *qui tu es* ? Trois mécanismes à reconnaître (le détail relève du développement applicatif) :
+
+- **Session + cookie** : à la connexion, le serveur te donne un **badge temporaire** (le *cookie*, une petite donnée que ton navigateur renvoie à chaque requête) et garde en mémoire qui tu es. Simple, mais le serveur doit tout mémoriser.
+- **JWT** (JSON Web Token) = un « bracelet signé » contenant tes informations : n'importe quel service peut **vérifier la signature** sans interroger le serveur d'origine — parfait entre microservices. Règle : durée de vie **courte** + renouvellement.
+- **OAuth2** = la **délégation** : « Se connecter avec Google » — tu prouves ton identité à Google, l'application reçoit un jeton limité, **jamais ton mot de passe**. Préférable à « coder son propre login ».
+
+### 3.5 Hacher ou chiffrer ? Protéger les mots de passe
+
+> 🧭 **Transition** : les secrets ci-dessus doivent être stockés — et la distinction la plus importante (et la plus confondue) de la sécurité :
+
+- **Chiffrement** = un **coffre-fort** : réversible avec la clé (c'est ce que fait TLS, Leçon 4). Pour tout ce qu'on doit **relire**.
+- **Hachage** = un **mixeur** : sens unique, taille fixe, même entrée → même sortie. On **ne peut pas** retrouver l'entrée. Pour tout ce qu'on doit seulement **vérifier**.
+
+Un mot de passe se **hache donc, jamais ne se « chiffre »** : à la connexion, l'application re-calcule le haché et compare. On ajoute un **sel** (salt) = une valeur aléatoire propre à chaque utilisateur, insérée avant le hachage : deux personnes avec le même mot de passe ont des hachés différents, ce qui rend les tables pré-calculées d'attaquant (*rainbow tables*) inutiles. Et on utilise une fonction **volontairement lente** (bcrypt, argon2) : quelques dizaines de millisecondes pour un humain, mais des milliards de mots de passe testés par un attaquant deviennent prohibitifs — un SHA-256 « brut » est trop rapide pour cet usage.
+
+```bash
+echo -n "bonjour" | sha256sum       # -n : sans retour à la ligne ; le haché SHA-256
+echo -n "bonjouR" | sha256sum       # un caractère changé = haché TOTALEMENT différent
+htpasswd -nbBC 10 "" "mon-mot-de-passe"   # bcrypt, coût 10 (paquet apache2-utils) :
+# → $2y$10$... : le haché contient l'algorithme, le coût et le sel
+```
+
+> 💡 Le même principe sert à **vérifier l'intégrité** d'un téléchargement : `sha256sum fichier.iso` comparé à la somme publiée sur le site officiel — identique = fichier non altéré.
+
+---
+
 ## 4. Bonnes pratiques modernes (2025-2026)
 
 - **Zéro secret dans le code** : ni en clair, ni même commenté — l'historique Git les garde à jamais.

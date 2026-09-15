@@ -206,6 +206,34 @@ pip freeze > requirements.txt   # contient désormais requests==...
 - **Figer les dépendances** (`pip freeze > requirements.txt`) et travailler dans un `venv` : reproductibilité du script sur toute machine.
 - **Gérer les erreurs aux bons endroits** : `try/except` ciblé sur `subprocess` (échec commande) et `requests` (connexion/temps). Ne jamais tout avaler.
 
+### 4.1 Vérifier son script : pytest en 10 minutes
+
+> 🧭 **Transition** : ton script tourne (peut-être en cron, vu au Bloc 2) — mais qui vérifie qu'il fonctionne *encore* après chaque modification ? Le **test unitaire** (Bloc 1, Leçon 3) automatisé avec **pytest**, l'outil standard Python.
+
+**Le principe** : mettre la logique dans des **fonctions** (mêmes entrées → même sortie), puis écrire dans un fichier `test_*.py` des vérifications avec **`assert`** (« affirme que… » — si c'est faux, le test échoue). `pytest` découvre et lance tous ces tests en une commande.
+
+```python
+# surveillance.py — la logique en fonction testable
+def statut_disque(pourcentage, seuil=80):
+    if pourcentage < 0:
+        return "ERREUR"
+    return "ALERTE" if pourcentage >= seuil else "OK"
+
+# test_surveillance.py — un test = un comportement, nommé clairement
+from surveillance import statut_disque
+
+def test_statut_seuil_exact():
+    assert statut_disque(80, 80) == "ALERTE"    # cas limite : au seuil exact
+```
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate   # venv (Leçon 5)
+pip install pytest                                    # installe l'outil de test
+pytest -v            # -v : verbeux ; affiche chaque test et son verdict (passed/failed)
+```
+
+> 💡 **Pourquoi c'est utile** : un échec pytest te donne la ligne, la valeur obtenue et l'attendue — et au **Bloc 11 (CI/CD)**, la pipeline lancera ces tests à chaque commit et bloquera le déploiement en cas d'échec. C'est le « détecteur de fumée » branché sur ton code. Garde deux règles : **tests rapides et isolés** (jamais d'appel réseau réel) et **on corrige le code, pas le test** quand un échec révèle un bug.
+
 ---
 
 ## 5. Pièges à éviter

@@ -46,6 +46,7 @@ Le **fil rouge** : *« comprendre pourquoi une application (frontend Angular + b
 | 6 | Reverse Proxy et Load Balancing | Nginx, upstream, health check, failover, L4/L7 |
 | 7 | Contrôle d'accès et secrets | Auth vs autorisation, RBAC/ABAC, `.env`, `.gitignore`, coffres |
 | 8 | DevSecOps et Shift-Left | SAST/DAST, dependency/container/secret scan, CVE, pipeline |
+| 9 | DNS en profondeur | Enregistrements A/CNAME/MX/TXT, TTL, `dig +trace`, diagnostic |
 
 Chaque dossier contient 4 fichiers : `01-lecon.md`, `02-exercice.md`, `03-correction.md`, `04-commandes-references.md`.
 

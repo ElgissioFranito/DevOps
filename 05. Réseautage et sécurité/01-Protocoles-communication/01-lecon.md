@@ -195,6 +195,26 @@ ss -tulpn   # liste des ports/listen/ports TCP (t) et UDP (u)
 curl -I https://httpbin.org   # affiche les headers de la réponse web
 ```
 
+### 3.4 Les codes de statut HTTP : le langage des réponses
+
+> 🧭 **Transition** : tu sais *envoyer* une requête (`curl`) et lire ses en-têtes. Chaque réponse HTTP commence par un **code à 3 chiffres** qui résume le résultat — c'est le premier signal que tu liras en production (monitoring, logs Nginx, pipelines).
+
+**Analogie du réceptionniste d'hôtel** : ta requête est une demande au comptoir, le code est sa réponse :
+
+| Famille | Signification | Codes à connaître |
+|---|---|---|
+| **2xx** | « C'est fait » | `200` OK, `201` Created (POST qui crée), `204` No Content |
+| **3xx** | « C'est ailleurs » | `301` Moved (redirection permanente, ex. http → https), `302` Found |
+| **4xx** | « C'est votre faute » | `400` Bad Request, `401` Unauthorized (pas d'identification), `403` Forbidden (identifié mais pas le droit), `404` Not Found, `429` Too Many Requests (trop de requêtes) |
+| **5xx** | « C'est notre faute » | `500` Internal Server Error (bug dans le code), `502` Bad Gateway (le reverse proxy ne joint pas le backend), `503` Service Unavailable |
+
+```bash
+curl -o /dev/null -s -w "%{http_code}\n" https://example.com
+# -o /dev/null : jette le corps ; -s : silence ; -w : n'affiche que le code
+```
+
+> 💡 **Deux confusions classiques à éviter** : `401` = « présente d'abord un badge » (se connecter), `403` = « ton badge est valide, mais pas accès à cet étage » (demander les droits — rappel Leçon 7). Et `500` = bug **dans** l'application (voir ses logs), alors que `502/503` = le **proxy** (Leçon 6) n'arrive pas à joindre l'application (vérifier service et port, Bloc 2 Leçon 4). Le code t'oriente vers le bon outil de diagnostic.
+
 ---
 
 ## 4. Bonnes pratiques modernes (2025-2026)

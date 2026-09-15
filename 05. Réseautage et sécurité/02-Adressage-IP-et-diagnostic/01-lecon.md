@@ -163,6 +163,26 @@ curl -4 https://api.ipify.org
 - **Ne jamais lancer `ping`/`traceroute` en boucle infinie en production** sans `-c`.
 - La **plage `/24`** reste le standard de base pour les petits LANs ; en cloud, on découpe souvent des subnets plus fins (`/26`, `/27`) par zone de sécurité.
 
+### 4.1 Le cas particulier WSL2 : un NAT interne avec une IP qui change
+
+> 🧭 **Transition** : tu utilises peut-être **WSL2** comme machine de test (Bloc 2) — et son réseau cache une surprise qui explique bien des « pourquoi ça ne marche pas depuis mon autre PC ? ». C'est une application directe du NAT que tu viens de voir.
+
+**WSL2** (Windows Subsystem for Linux 2) n'est pas un Linux « directement sur Windows » : c'est une **machine virtuelle légère** lancée par Windows (via **Hyper-V**, l'hyperviseur intégré de Windows). Windows la place **derrière un NAT** : elle a une IP privée *virtuelle* (ex. `172.20.45.10`) qui **change à chaque démarrage**, et les **autres machines de ton réseau ne peuvent pas la joindre** — elles ne voient pas ce réseau interne.
+
+```bash
+ip addr          # dans WSL2 : l'IP en 172.x.x.x est le monde « à part » du NAT
+```
+
+Trois manières d'y répondre (de la bricole au sérieux) :
+
+1. **Mode `mirrored`** = « en miroir » : mode où WSL2 **copie l'adresse IP de ton PC** Windows au lieu d'en avoir une propre cachée derrière un NAT. On l'active dans le fichier `%UserProfile%\.wslconfig` avec `networkingMode=mirrored` (Windows 11 récent).
+2. **Redirection de port** (*port forwarding*) = faire écouter un « réceptionniste » (Windows ou le routeur) sur un port, qui **transmet tout ce qui arrive** vers une autre machine/port interne. Sous Windows : `netsh interface portproxy ...` — à reconfigurer à chaque boot puisque l'IP WSL change (une tâche planifiée, Bloc 2 Leçon 8, s'en charge).
+3. ✅ **La réponse professionnelle** : un service à exposer au réseau ne vit **pas** sur le PC d'un développeur. On utilise une VM en **accès par pont** (*bridged*) = mode réseau d'une VM où elle se branche « directement » sur le réseau local, comme un vrai PC : elle reçoit sa propre IP du routeur, visible par tous (VirtualBox, ou **Proxmox** = un logiciel libre qui transforme un PC en serveur pour héberger plusieurs VM, comme VirtualBox mais pensé pour un serveur permanent) — ou un **VPS cloud** (Bloc 6) avec une IP stable.
+
+### 4.2 tcpdump : voir les paquets (à définir, ne pas creuser)
+
+> 🔵 **tcpdump** = outil qui **capture les paquets** (les unités de données du réseau, Leçon 1) visibles sur une interface, avec des filtres (ex. `sudo tcpdump -i any -c 10 port 80` : 10 paquets HTTP). Avec l'option `-A`, on voit le contenu *en clair* — la démonstration vivante de pourquoi HTTPS (Leçon 4) est obligatoire. À ne faire **que sur tes propres machines**, jamais sur un réseau qui ne t'appartient pas (illégal).
+
 ---
 
 ## 5. Pièges à éviter
