@@ -1,6 +1,6 @@
-# Correction — Leçon 5 : VPN et tunnels sécurisés
+# Correction — Leçon 5a : VPN (accès privé avec WireGuard)
 
-> **Bloc 5 · Leçon 5** — Correction pas à pas.
+> **Bloc 5 · Leçon 5a** — Correction pas à pas.
 > 🧭 **Articulation** : compare ta réalisation avec celle-ci ; si un test a échoué, va directement à la table de **diagnostic** (section 2), puis reviens à la checklist (section 3).
 
 ---
@@ -118,6 +118,41 @@ curl https://ifconfig.me
 
 ❓ **Réponse (étape 4 de l'exercice)** : avantage du full tunnel sur un Wi-Fi public → **tout** est chiffré de bout en bout, y compris la navigation web ; inconvénient au quotidien → toute ta connexion dépend du serveur (lenteur, indisponibilité, certains services se voient géo-restreints). D'où le **split par défaut**.
 
+### Étape 6 (bonus) — Le site-à-site
+
+**IP forwarding** (des deux côtés — sans ça, les passerelles jettent les paquets qui ne leur sont pas destinés) :
+
+```bash
+echo 'net.ipv4.ip_forward=1' | sudo tee /etc/sysctl.d/99-wg.conf && sudo sysctl --system
+# active le routage : la passerelle accepte de faire transiter les paquets
+# entre son interface tunnel (wg0) et son interface LAN
+```
+
+**Configs miroir** (section 3.8 de la leçon) — passerelle A :
+
+```ini
+[Interface]
+Address = 10.77.77.1/24
+PrivateKey = <clé privée A>
+
+[Peer]
+PublicKey = <clé publique B>
+Endpoint = <IP publique B>:51820
+AllowedIPs = 10.77.77.0/24, 192.168.20.0/24
+# le RÉSEAU B ENTIER est joignable via la passerelle B — c'est LA différence
+# avec l'accès distant, où le serveur n'annonce que des IP uniques (/32)
+PersistentKeepalive = 25
+```
+
+et passerelle B (miroir) : `Address = 10.77.77.2/24`, peer A avec `AllowedIPs = 10.77.77.0/24, 192.168.10.0/24`.
+
+❓ **Réponses aux questions de l'étape 6** :
+- Les `AllowedIPs` côté passerelle annoncent des **sous-réseaux entiers** (`/24`), pas des IP uniques (`/32`) : la passerelle A route « tout ce qui va vers 192.168.20.0/24 » dans le tunnel, et la passerelle B fait le miroir. L'accès distant n'avait qu'une IP par peer — ici, tout un réseau derrière chaque peer.
+- Le ping fonctionne depuis la VM simple client car elle envoie ses paquets vers **sa passerelle par défaut** (= la passerelle A) ; celle-ci les chiffre dans le tunnel, les remet à la passerelle B qui les délivre sur son LAN. **La VM n'a pas besoin de connaître WireGuard** : c'est tout l'intérêt du site-à-site — la transparence pour les machines du réseau.
+- En entreprise, ton admin fait exactement la même chose, souvent avec **IPSec** entre deux routeurs (rappel Leçon 2) : deux réseaux sur Internet qui se voient comme un seul. Le concept est identique, seul l'outil change.
+
+❓ **Réponse à la *Question NAT* (mini-quiz)** : ton PC à la maison n'a qu'une IP **privée** (`192.168.x.x`) partagée via l'IP publique de la box (zoom §2.2 de la leçon) ; quand un paquet arrive de l'extérieur **sans demande préalable**, la box ne sait pas à quel appareil le donner. La règle de **port forwarding** lui dit : « tout ce qui arrive sur le port 51820 → le serveur ». Un **VPS**, lui, possède une **IP publique directe** : il est joignable sans intermédiaire, donc sans redirection.
+
 ---
 
 ## 2. Diagnostic (si un test a échoué)
@@ -141,10 +176,11 @@ curl https://ifconfig.me
 - [ ] `systemctl enable wg-quick@wg0` côté serveur.
 - [ ] Je prouve split vs full avec `curl https://ifconfig.me`.
 - [ ] SSH joignable via le tunnel, fermé au public.
+- [ ] J'explique la différence **accès distant** (une machine → un réseau, `AllowedIPs` par IP) vs **site-à-site** (deux réseaux → deux passerelles, `AllowedIPs` par sous-réseau, IP forwarding requis).
 
 ## 🧠 Conseils pour la suite
 
 - Au **Bloc 6 (VPC)**, tu utiliseras exactement cette mécanique pour joindre une base managée (RDS) sans l'exposer : ton poste dans le tunnel, la base joignable depuis l'IP privée du tunnel.
-- Tu découvriras aussi les **tunnels managés du cloud** (Site-to-Site VPN, Client VPN) : le concept est identique, seul le service change.
+- Tu découvriras aussi les **tunnels managés du cloud** (Site-to-Site VPN, Client VPN — Bloc 6) : tu as déjà vu leur différence cette leçon — le **Client VPN** = accès distant, le **Site-to-Site VPN** = le site-à-site des passerelles ; le concept est identique, seul le service change.
 - Quand tu auras 3-4 appareils, scripte la création de clients (une paire de clés + un bloc `[Peer]`) — et retiens : la **Leçon 6 (reverse proxy)** peut aussi se placer derrière un VPN quand les services ne sont pas destinés au public.
 

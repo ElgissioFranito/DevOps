@@ -27,7 +27,7 @@ Objectif de la roadmap : *« un problème réseau ne te paraît plus magique »*
 
 - **Les Blocs 01-04** : le parcours « du Git à la production » (Bloc 01) et les blocs Linux/scripting. Le schéma `DNS → IP → port → service` y a été évoqué : on l'approfondit ici.
 - **Une machine de test** : VM (ex. VirtualBox) ou WSL ou VPS de test — pour les leçons pare-feu et reverse proxy. **Jamais** une machine de production.
-- **Outils à installer en cours de route** (chaque leçon le précise) : `curl`, `dig`/`dnsutils`, `openssl`, `ufw`, `nginx`, puis `wireguard-tools` et `openvpn` (Leçon 5). Sur Ubuntu/WSL, la plupart sont déjà là ou s'installent via `apt`.
+- **Outils à installer en cours de route** (chaque leçon le précise) : `curl`, `dig`/`dnsutils`, `openssl`, `ufw`, `nginx`, puis `wireguard-tools` et `openvpn` (Leçon 5a) et `cloudflared` (Leçon 5b). Sur Ubuntu/WSL, la plupart sont déjà là ou s'installent via `apt`.
 - **Un éditeur** : `nano` (suffit) ou VS Code.
 
 ---
@@ -42,7 +42,8 @@ Le **fil rouge** : *« comprendre pourquoi une application (frontend Angular + b
 | 2 | Adressage IP et diagnostic | IP, CIDR, subnet, gateway, privée/publique ; `ping`/`traceroute`/`ip` |
 | 3 | Pare-feu et contrôle des flux | UFW, open/filtré, défaut-deny, moindre exposition, L3/L4/L7 |
 | 4 | TLS, HTTPS et certificats | Clés, certificats, CA ; `openssl` ; erreurs TLS |
-| 5 | VPN et tunnels sécurisés | VPN (à quoi ça sert, usages quotidiens) ; WireGuard, OpenVPN, tunnels SSH ; AllowedIPs, split tunnel |
+| 5a | VPN : accès privé à distance | VPN (accès distant vs site-à-site) ; WireGuard de A à Z, split tunnel ; Tailscale/NetBird ; le NAT en clair |
+| 5b | Tunnels ponctuels et exposition de services | Tunnels SSH `-L`/`-R`/`-D`, reverse SSH tunnel ; Cloudflare Tunnel, ngrok ; quel outil pour quel besoin |
 | 6 | Reverse Proxy et Load Balancing | Nginx, upstream, health check, failover, L4/L7 |
 | 7 | Contrôle d'accès et secrets | Auth vs autorisation, RBAC/ABAC, `.env`, `.gitignore`, coffres |
 | 8 | DevSecOps et Shift-Left | SAST/DAST, dependency/container/secret scan, CVE, pipeline |
@@ -65,9 +66,10 @@ Chaque dossier contient 4 fichiers : `01-lecon.md`, `02-exercice.md`, `03-correc
 | **Pare-feu (firewall)** | Le gardien qui filtre les flux | Leçon 3 |
 | **TLS / HTTPS** | Le chiffrement qui protège les échanges | Leçon 4 |
 | **Certificat / CA** | « Carte d'identité » d'un serveur, signée par une autorité | Leçon 4 |
-| **VPN / tunnel** | « Conduit secret » chiffré entre ta machine et un réseau distant (Virtual Private Network) | Leçon 5 |
-| **WireGuard / OpenVPN** | Les deux outils VPN à connaître : moderne & simple / vétéran & universel | Leçon 5 |
-| **AllowedIPs / split tunnel** | Les IP routées dans le VPN / mode où seul le trafic choisi passe par le tunnel | Leçon 5 |
+| **VPN / tunnel** | « Conduit secret » chiffré entre ta machine et un réseau distant (Virtual Private Network) | Leçon 5a |
+| **WireGuard / OpenVPN** | Les deux outils VPN à connaître : moderne & simple / vétéran & universel | Leçon 5a |
+| **AllowedIPs / split tunnel** | Les IP routées dans le VPN / mode où seul le trafic choisi passe par le tunnel | Leçon 5a |
+| **Tunnel SSH / Cloudflare Tunnel** | Atteindre un port ou exposer un service ponctuellement (reverse, tunnel sortant) | Leçon 5b |
 | **Reverse proxy** | Le point d'entrée unique devant les applications | Leçon 6 |
 | **Load balancer** | Le répartiteur de charge entre serveurs | Leçon 6 |
 | **RBAC / ABAC** | Modèles de contrôle d'accès par rôles / attributs | Leçon 7 |
@@ -84,7 +86,7 @@ Tu peux, **de mémoire** :
 - expliquer la **chaîne** `DNS → IP → route → firewall → port → service → application` et identifier où une requête peut être bloquée ;
 - diagnostiquer avec `ping`, `traceroute`, `curl`, `nc`, `dig`, `ip` ;
 - configurer un pare-feu simple (UFW) en respectant le moindre exposition ;
-- monter et tester un tunnel VPN (WireGuard), et expliquer quand l'utiliser (administration à distance, Wi-Fi public, accès à un réseau privé) ;
+- monter et tester un tunnel VPN (WireGuard, Leçon 5a) et un tunnel SSH/Cloudflare ponctuel (Leçon 5b), et expliquer quand utiliser l'un ou l'autre (administration à distance, Wi-Fi public, accès à un réseau privé, partage ponctuel) ;
 - expliquer et manipuler un certificat TLS avec `openssl` ;
 - expliquer pourquoi on place un reverse proxy/load balancer et en écrire une config Nginx simple ;
 - appliquer le moindre privilège et ne jamais committer de secret ;

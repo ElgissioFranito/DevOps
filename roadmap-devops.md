@@ -756,9 +756,9 @@ Port 5432 → bloqué
 ```
 ---
 
-### VPN et tunnels sécurisés
+### VPN et tunnels sécurisés (Leçons 5a-5b)
 
-**VPN (Virtual Private Network)** = tunnel chiffré entre ta machine et un réseau distant : tu circules dedans comme dans un réseau privé local, alors que le transport passe par Internet.
+**VPN (Virtual Private Network)** = tunnel chiffré entre ta machine (ou un réseau entier) et un réseau distant : tu circules dedans comme dans un réseau privé local, alors que le transport passe par Internet.
 
 ```
 Ta machine ════ tunnel chiffré (VPN) ════> Serveur / réseau distant
@@ -766,14 +766,18 @@ Ta machine ════ tunnel chiffré (VPN) ════> Serveur / réseau di
 
 #### 🎯 Objectif final
 
-Savoir monter et utiliser un VPN **au quotidien** (ordinateur, téléphone, serveurs) avec WireGuard, et savoir choisir entre WireGuard, OpenVPN et un simple tunnel SSH.
+Savoir monter et utiliser un VPN **au quotidien** (ordinateur, téléphone, serveurs) avec WireGuard (Leçon 5a), et choisir le bon outil selon le besoin : VPN (réseau entier, persistant), tunnel SSH ou Cloudflare Tunnel (ponctuel — Leçon 5b).
 
 #### 📚 Ce que tu dois connaître
 
 - VPN, tunnel, interface virtuelle (`wg0`, `tun0`)
+- Les **deux familles** : accès distant (machine → réseau) vs site-à-site (réseau → réseau)
 - **WireGuard** : clés (`wg genkey`/`wg pubkey`), `AllowedIPs`, `wg-quick`, split tunnel vs full tunnel, `PersistentKeepalive`
 - **OpenVPN** : PKI à base de certificats (lien avec la section TLS)
-- **Tunnels SSH** : `ssh -L` (local), `-R` (distant), `-D` (proxy SOCKS) — pour un besoin ponctuel
+- **Tailscale / NetBird** : VPN mesh au-dessus de WireGuard (serveur de coordination, identités)
+- **Tunnels SSH** : `ssh -L` (local), `-R` (reverse), `-D` (proxy SOCKS) — pour un besoin ponctuel
+- **Cloudflare Tunnel / ngrok** : exposer un service sans IP publique ni port ouvert (tunnel sortant)
+- **NAT** : pourquoi il protège et complique à la fois (port forwarding, keepalive)
 - Usages quotidiens : Wi-Fi public, administration à distance sans exposer SSH, homelab, accès à un réseau privé (y compris un VPC cloud, voir Bloc 6)
 
 #### 🧠 Jargon expliqué
@@ -788,11 +792,11 @@ Savoir monter et utiliser un VPN **au quotidien** (ordinateur, téléphone, serv
 
 #### 🛠️ Ce que tu dois savoir faire concrètement
 
-Générer des clés, écrire une config serveur et une config client (`wg0.conf`), ouvrir le port VPN au pare-feu, démarrer le tunnel, le vérifier (`wg show`, `ping`) et le rendre persistant (`systemctl enable wg-quick@wg0`).
+Générer des clés, écrire une config serveur et une config client (`wg0.conf`), ouvrir le port VPN au pare-feu, démarrer le tunnel, le vérifier (`wg show`, `ping`) et le rendre persistant (`systemctl enable wg-quick@wg0`) ; créer les trois tunnels SSH et un tunnel `cloudflared`.
 
 #### ✅ Critère pour considérer le point acquis
 
-Tu peux monter un tunnel WireGuard (serveur + client) de zéro, expliquer tes `AllowedIPs`, et dire quand préférer SSH (ponctuel) ou OpenVPN (compatibilité).
+Tu peux monter un tunnel WireGuard (serveur + client) de zéro, expliquer tes `AllowedIPs`, distinguer accès distant et site-à-site, et dire quand préférer un tunnel SSH ou Cloudflare Tunnel (ponctuel) au VPN — ou OpenVPN (compatibilité).
 
 ### Reverse Proxy et Load Balancing
 

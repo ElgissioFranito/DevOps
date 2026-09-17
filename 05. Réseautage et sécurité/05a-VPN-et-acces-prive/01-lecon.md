@@ -1,8 +1,9 @@
-# Leçon 5 — VPN et tunnels sécurisés (WireGuard & OpenVPN)
+# Leçon 5a — VPN : accéder à un réseau privé à distance (WireGuard)
 
-> **Bloc 5 · Réseautage et sécurité** — Leçon 5 sur 8
-> 🧭 **Pont depuis la Leçon 4 (TLS)** : tu sais désormais chiffrer une session web grâce à une paire de clés (publique/privée) et à des certificats. Cette leçon réutilise **exactement** ces mécanismes — mêmes idées de chiffrement, mêmes réflexes sur les clés — mais pour un autre but : **relier ta machine à un réseau distant comme si tu y étais physiquement branché(e)**. C'est le **VPN**, un outil que tu utiliseras **tous les jours** (ordinateur, téléphone, serveurs) et qui servira aussi au Bloc 6 (cloud).
+> **Bloc 5 · Réseautage et sécurité** — Leçon 5a (le VPN, première moitié de la Leçon 5)
+> 🧭 **Pont depuis la Leçon 4 (TLS)** : tu sais désormais chiffrer une session web grâce à une paire de clés (publique/privée) et à des certificats. Cette leçon réutilise **exactement** ces mécanismes — mêmes idées de chiffrement, mêmes réflexes sur les clés — mais pour un autre but : **relier ta machine (ou un réseau entier) à un réseau distant comme s'il y était physiquement branché**. C'est le **VPN**, un outil que tu utiliseras **tous les jours** (ordinateur, téléphone, serveurs) et qui servira aussi au Bloc 6 (cloud).
 > 👉 **Fil rouge de la leçon** : monter ton **propre serveur VPN** avec **WireGuard**, y connecter ton ordinateur et ton téléphone, et ne rien exposer d'inutile (rappel pare-feu, Leçon 3).
+> 🧭 **Où sont passés les tunnels SSH et Cloudflare Tunnel ?** Ils vivent dans la **Leçon 5b** (`05b-Tunnels-et-exposition-services/`) : on sépare volontairement le **VPN** (persistant, réseau entier) des **tunnels ponctuels** (une session, un service) — deux outils, deux moments d'apprentissage.
 
 ---
 
@@ -10,12 +11,11 @@
 
 À la fin de cette leçon, tu seras capable de :
 
-1. **Expliquer** ce qu'est un VPN, ce qu'il protège, et citer des usages quotidiens (Wi-Fi public, administration à distance, accès à un réseau privé) — sans confondre avec le cas cloud (VPC, Bloc 6).
+1. **Expliquer** ce qu'est un VPN, ce qu'il protège, et citer des usages quotidiens (Wi-Fi public, administration à distance, accès à un réseau privé) — **et distinguer les deux grandes familles** : VPN d'**accès distant** (ta machine → un réseau) et VPN **site-à-site** (un réseau entier ↔ un autre réseau).
 2. **Monter** un serveur VPN **WireGuard** complet : clés, config serveur, config client, service persistant.
 3. **Connecter** plusieurs appareils (ordinateur, téléphone) et **vérifier** le tunnel avec `wg show`, `ping`, `curl`.
 4. **Régler** le périmètre du tunnel avec **AllowedIPs** : split tunnel vs full tunnel.
-5. **Créer** des tunnels **SSH** (`-L`, `-R`, `-D`) pour les besoins ponctuels.
-6. **Situer** OpenVPN face à WireGuard et savoir quand choisir l'un ou l'autre.
+5. **Situer** OpenVPN face à WireGuard, et **Tailscale/NetBird** face au WireGuard « brut », et savoir quand choisir l'un ou l'autre.
 
 ---
 
@@ -40,6 +40,12 @@ Trafic vers le reste    → interface physique (sortie normale)
 
 Le paquet qui entre dans le tunnel est **chiffré** avec les clés échangées à la connexion (même logique que TLS, Leçon 4), enveloppé dans un paquet **UDP** (port **51820** par défaut chez WireGuard), envoyé sur Internet, puis déchiffré à l'arrivée. Pour le réseau distant, tu es **une machine locale de plus** — avec une IP privée du réseau du tunnel.
 
+> 🔎 **Zoom : le NAT, enfin clair** (tu l'as croisé en Leçon 2, et il revient tout le temps dans les discussions VPN — soyons précis).
+> - **Quoi ?** **NAT** = *Network Address Translation* : la **traduction d'adresses** faite par ta **box**. Chez toi, tes machines ont des **IP privées** (`192.168.x.x` — rappel Leçon 2) ; elles partagent **une seule IP publique** face à Internet. Ta box se tient **entre les deux** et **traduit** : elle note dans une **table** « la requête du PC 192.168.1.10 vers le port 443 de ce site » et, à la réponse, elle sait **à quelle machine de la maison la renvoyer**.
+> - **Analogie** : ta box est la **réception d'un immeuble**. Tout le courrier arrive à l'**adresse unique de l'immeuble** (IP publique) ; la réception regarde le **destinataire sur l'enveloppe** (appartement n°X) pour remettre le colis au bon locataire. Depuis l'extérieur, on ne connaît que l'immeuble — jamais les appartements.
+> - **Comment ça nous concerne ici ?** Deux conséquences directes : 1) **de l'extérieur, on ne peut pas « sonner » chez toi spontanément** : ta box ne sait pas à quel appareil transmettre un paquet qui arrive sans demande préalable — c'est pour ça que ton **serveur VPN chez toi a besoin d'une règle de redirection de port** (*port forwarding*, à configurer dans la box) ; 2) **une connexion inactive finit par tomber** : la box « oublie » la ligne de sa table au bout d'un moment — d'où le **`PersistentKeepalive`** de WireGuard (§3.3) : un petit paquet régulier qui dit « je suis toujours là » pour que la box garde la ligne.
+> - **Quand le croiseras-tu encore ?** Partout : derrière chaque box/routeur domestique, dans le **cloud** (la NAT Gateway du Bloc 6 fait exactement ce travail pour les sous-réseaux privés), et dans la section 3.7 ci-dessous : le `MASQUERADE` est **le même mécanisme côté serveur** — il réécrit l'adresse des paquets du tunnel avec l'IP du serveur pour qu'ils circulent dans son LAN.
+
 ### 2.3 Le « quand » : usages quotidiens
 
 | Situation | Sans VPN | Avec VPN |
@@ -48,6 +54,7 @@ Le paquet qui entre dans le tunnel est **chiffré** avec les clés échangées �
 | Administration à distance | il faut exposer SSH (22) publiquement | SSH reste fermé au public ; tu l'utilises via l'IP privée du tunnel |
 | Homelab / services auto-hébergés | exposés publiquement ou inaccessibles dehors | tu y accèdes comme si tu étais à la maison |
 | Cloud (Bloc 6) | base managée inaccessible ou exposée | tu te connectes à la base via le tunnel, sans l'exposer |
+| Deux réseaux à relier (bureau ↔ datacenter, entreprise ↔ cloud) | impossible sans exposer des services de part et d'autre | VPN **site-à-site** : les deux réseaux se voient comme un seul (voir §2.6) |
 
 > 🧭 **Lien avec la Leçon 3** : le VPN ne remplace pas le pare-feu — il le complète. Le principe reste le même : **n'exposer au public que le strict nécessaire**. Ici, c'est **un seul port UDP**.
 
@@ -59,7 +66,7 @@ Le paquet qui entre dans le tunnel est **chiffré** avec les clés échangées �
 | **OpenVPN** | 2001 | universel (Windows, routeurs, pare-feux d'entreprise), PKI à base de certificats (Leçon 4) | plus lourd, config plus longue | quand l'environnement l'exige ou pour la compatibilité |
 | **tunnel SSH** | — | déjà installé partout, zéro installation | point-à-point (un port, une session), pas un « réseau » | besoin **ponctuel** |
 
-> 📌 **Règle simple** : ponctuel → **SSH** ; usage régulier → **WireGuard** ; obligation de compatibilité → **OpenVPN**.
+> 📌 **Règle simple** : ponctuel (un port, une session) → **tunnels SSH — Leçon 5b** ; usage régulier (un réseau, plusieurs services) → **WireGuard** (cette leçon) ; obligation de compatibilité → **OpenVPN**.
 
 ### 2.5 Split tunnel vs full tunnel : les `AllowedIPs`
 
@@ -72,11 +79,47 @@ AllowedIPs = 0.0.0.0/0       → FULL TUNNEL  : TOUT ton trafic passe par le tun
 
 - **Split tunnel** (défaut recommandé) : seul le trafic destiné au réseau privé emprunte le tunnel ; le reste (navigation web, streaming) sort par ta connexion normale → rapide, ne perturbe rien.
 - **Full tunnel** : tout passe par ton serveur VPN — utile sur un **Wi-Fi public** non fiable, ou pour sortir sur Internet avec l'IP du serveur. Contrepartie : toute ta connexion dépend du serveur (lenteur, disponibilité).
+### 2.6 Les deux familles de VPN : accès distant vs site-à-site
+
+Jusqu'ici on a parlé d'**une machine** (ton PC, ton téléphone) qui rejoint **un réseau**. Mais un VPN peut aussi relier **deux réseaux entiers**. Ce sont les deux grandes familles à connaître :
+
+| | **VPN d'accès distant** (client → réseau) | **VPN site-à-site** (réseau → réseau) |
+|---|---|---|
+| **Qui se connecte** | une machine isolée (ton PC, ton téléphone) | deux **passerelles** (routeurs/serveurs VPN), une par réseau |
+| **Ce qui est relié** | ta machine au réseau distant | **tout** le réseau A à **tout** le réseau B |
+| **Qui configure** | chaque utilisateur installe un client | un admin configure une fois, tout le monde en profite |
+| **Exemple typique** | télétravailler depuis chez toi | le bureau de Paris et le datacenter de Lyon se parlent comme voisins |
+| **Dans cette leçon** | ✅ c'est ce que tu montes avec WireGuard (sections 3.1 à 3.7) | aperçu en section 3.8, approfondi au Bloc 6 (cloud) |
+
+> 💡 **Analogie** : le VPN d'accès distant, c'est un **tunnel privatif entre TON appartement et l'immeuble de l'entreprise** — toi seul l'empruntes. Le VPN site-à-site, c'est un **passage souterrain fermé entre les DEUX immeubles entiers** : tous les habitants du premier peuvent aller dans le second, sans même s'en apercevoir (pour eux, c'est le même bâtiment). Ta passerelle fait le travail : tu ne configures rien sur ton PC.
+
+**Pourquoi c'est important en DevOps ?** C'est exactement ainsi qu'on relie **un réseau d'entreprise à un cloud privé** (VPC — Virtual Private Cloud, Bloc 6) : le serveur applicatif du bureau atteint la base de données du cloud avec son IP privée, comme si les deux étaient dans la même pièce. C'est aussi ce que faisait déjà ton admin d'entreprise avec **IPSec** (rappel Leçon 2 : suite de protocoles de chiffrement IP, très utilisée pour les VPN site-à-site d'entreprise) — WireGuard permet le même résultat avec une config bien plus simple.
+
+> 🧩 **« VPN personnel », « VPN mobile », « Cloud VPN », « SSL VPN »… : que sont ces noms ?** En recherche, tu croiseras beaucoup d'étiquettes. **Ce ne sont pas de nouvelles architectures** : ce sont des **cas d'usage** ou des **technologies**, qui se ramènent toujours à **accès distant OU site-à-site** :
+>
+> | Étiquette vue en ligne | En réalité | Notre architecture |
+> |---|---|---|
+> | VPN « personnel » (NordVPN, ProtonVPN…) | accès distant vers un serveur qui fait sortir ton trafic sur Internet (vie privée) | **accès distant**, full tunnel (§2.5) |
+> | VPN « d'accès à distance » / « mobile » | ton PC ou ton téléphone rejoint un réseau ; « mobile » = toujours actif malgré les bascules Wi-Fi/4G | **accès distant** |
+> | **SSL VPN** (portails web d'entreprise) | accès distant qui utilise **TLS** (Leçon 4) et parfois un simple navigateur, sans client à installer | **accès distant**, protocole TLS |
+> | **Cloud VPN** (AWS Site-to-Site VPN, Azure VPN Gateway…) | site-à-site ou accès distant, **managé par un cloud provider** | **site-à-site** (Bloc 6) |
+>
+> Retiens la règle : **l'architecture (2 types) + la technologie (WireGuard, OpenVPN, IPSec, TLS) + la finalité (vie privée, télétravail, relier des sites) = toutes les combinaisons que le marketing nomme différemment.**
+
+> 🌐 **Zoom 2025-2026 : les VPN « mesh » — Tailscale & NetBird**. Avec du WireGuard brut, tu échanges les clés et écris les configs **à la main** pour chaque appareil — ingérable au-delà de quelques machines. **Tailscale** et **NetBird** ajoutent **au-dessus du moteur WireGuard** un **serveur de coordination** (un annuaire automatique) qui distribue clés et configs, une **authentification par identité** (tu te connectes avec ton compte Google/Microsoft/GitHub — pas de fichiers de clés à copier), et une **adresse IP privée stable** par machine, où qu'elle soit. Les tunnels se créent **automatiquement** entre les machines qui ont besoin de se parler, souvent en **direct** (peer-to-peer). L'appareil qui rejoint le réseau = accès distant ; un serveur qui le rejoint = un site de plus, relié automatiquement. C'est ce qu'on appelle un réseau **mesh** (chaque machine peut joindre les autres), lié à l'approche **Zero Trust** (Bloc 7 : on autorise par **identité**, pas par « être sur le réseau »). Différences : **Tailscale** = le plus simple, plan de contrôle en service (gratuit en usage perso) ; **NetBird** = **open source complet et auto-hébergeable** (tu héberges ton propre annuaire). En entreprise, tu verras ces outils **plus souvent que le WireGuard brut** — mais le moteur reste celui que tu viens de configurer à la main, et c'est bien de l'avoir fait une fois pour comprendre ce qu'ils automatisent.
+
+---
+
+
 ## 📖 Vocabulaire / Abréviations
 
 | Terme | Définition (une ligne) |
 |---|---|
-| **VPN** (Virtual Private Network) | réseau privé virtuel : tunnel chiffré entre ta machine et un réseau distant |
+| **VPN** (Virtual Private Network) | réseau privé virtuel : tunnel chiffré entre deux machines ou deux réseaux |
+| **Accès distant** | VPN reliant **une machine** à **un réseau** (ton PC → réseau de l'entreprise) |
+| **Site-à-site** (site-to-site) | VPN reliant **deux réseaux entiers** via deux passerelles (bureau ↔ datacenter, bureau ↔ cloud) |
+| **Passerelle** (gateway VPN) | machine/routeur qui héberge le tunnel pour tout son réseau local |
+| **IPSec** | suite de protocoles de chiffrement/authentification IP, historique des VPN site-à-site d'entreprise |
 | **Tunnel** | canal chiffré qui « emballe » (encapsule) ton trafic pour traverser Internet sans être lisible |
 | **Interface virtuelle** | « carte réseau » logicielle créée par le VPN (`wg0`, `tun0`) |
 | **WireGuard** | VPN moderne et minimal, intégré au noyau Linux depuis 2020 |
@@ -87,13 +130,19 @@ AllowedIPs = 0.0.0.0/0       → FULL TUNNEL  : TOUT ton trafic passe par le tun
 | **Endpoint** | l'adresse IP:port publique où joindre le serveur VPN |
 | **Handshake** | « poignée de main » chiffrée qui établit la session |
 | **Keepalive** | petit paquet régulier qui maintient le tunnel ouvert derrière une box/NAT |
+| **NAT** (Network Address Translation) | traduction d'adresses par la box/routeur : plusieurs IP privées partagent une IP publique (voir le zoom §2.2) |
+| **Port forwarding** | règle dans la box qui redirige un port entrant vers une machine précise du LAN |
+| **VPN mesh** | VPN où les machines se trouvent et se connectent **automatiquement** entre elles (Tailscale, NetBird) |
+| **Serveur de coordination** | annuaire central d'un VPN mesh : distribue clés, adresses et configs automatiquement |
+| **Tailscale / NetBird** | deux VPN mesh populaires construits sur WireGuard ; NetBird est open source et auto-hébergeable |
+| **Zero Trust** | modèle de sécurité qui autorise par **identité et contexte**, pas par appartenance à un réseau |
 | **Fuite DNS** (DNS leak) | quand les requêtes de noms sortent en clair malgré le VPN |
 | **SOCKS** | protocole de proxy générique (utilisé par `ssh -D`) |
 | **MTU** (Maximum Transmission Unit) | taille maximale d'un paquet ; mal réglée dans un tunnel, elle casse des connexions |
 
 ---
 
-> 🧭 **Transition** : la théorie est posée (pourquoi §2.1, comment §2.2, quand §2.3, quel outil §2.4, quel périmètre §2.5). Passons à la pratique : tout ce qui suit est **copiable-collable**. On commence par l'installation et les clés — la partie la plus importante, car sans clés cohérentes, rien ne se connectera.
+> 🧭 **Transition** : la théorie est posée (pourquoi §2.1, comment §2.2, quand §2.3, quel outil §2.4, quel périmètre §2.5, quelles familles §2.6). Passons à la pratique : tout ce qui suit est **copiable-collable**. On commence par l'installation et les clés — la partie la plus importante, car sans clés cohérentes, rien ne se connectera.
 
 ## 3. Exemples concrets
 
@@ -215,7 +264,57 @@ PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 
 Puis côté **client**, ajoute le LAN aux `AllowedIPs` : `AllowedIPs = 10.66.66.0/24, 192.168.1.0/24`.
 
-### 3.8 OpenVPN : le vétéran (aperçu)
+### 3.8 Variante site-à-site : relier deux réseaux entiers avec WireGuard
+
+Rappel (section 2.6) : au lieu de relier **une machine**, on relie **deux réseaux** — chacun derrière sa passerelle WireGuard. Exemple : le **réseau A** (bureau, `192.168.10.0/24`) et le **réseau B** (datacenter, `192.168.20.0/24`), avec un réseau de tunnel `10.77.77.0/24`. Prérequis : **l'IP forwarding activé** sur les DEUX passerelles (technique de la section 3.7 — sans lui, la passerelle ne retransmet pas les paquets).
+
+**Passerelle A** (bureau) — `/etc/wireguard/wg0.conf` :
+
+```ini
+[Interface]
+Address = 10.77.77.1/24
+# l'IP de la passerelle A dans le tunnel
+PrivateKey = <clé privée A>
+# la clé privée de la passerelle A
+
+[Peer]
+PublicKey = <clé publique B>
+# la clé publique de la passerelle B (comme un client, mais c'est un réseau entier)
+Endpoint = 198.51.100.20:51820
+# l'IP PUBLIQUE de la passerelle B (au moins un côté doit connaître l'autre)
+AllowedIPs = 10.77.77.0/24, 192.168.20.0/24
+# LE point clé : on annonce que tout le RÉSEAU B (192.168.20.0/24)
+# est joignable via ce peer — pas une seule IP comme en accès distant
+PersistentKeepalive = 25
+# maintient le tunnel si la passerelle B est derrière une box/NAT
+```
+
+**Passerelle B** (datacenter) — config miroir :
+
+```ini
+[Interface]
+Address = 10.77.77.2/24
+PrivateKey = <clé privée B>
+
+[Peer]
+PublicKey = <clé publique A>
+Endpoint = 203.0.113.10:51820
+# l'IP publique de la passerelle A
+AllowedIPs = 10.77.77.0/24, 192.168.10.0/24
+# miroir : tout le RÉSEAU A est joignable via ce peer
+```
+
+Après `wg-quick up wg0` des deux côtés, **n'importe quelle machine du bureau** peut joindre **n'importe quelle machine du datacenter** (et inversement) — à condition que les machines client aient une **route** vers le réseau distant via leur passerelle (sur la plupart des box/routeurs, c'est automatique : la passerelle VPN est la passerelle par défaut). Vérification :
+
+```bash
+ping -c 3 192.168.20.5
+# depuis une machine du réseau A : elle atteint une machine du réseau B
+# SANS avoir WireGuard installé — c'est sa passerelle qui fait tout le travail
+```
+
+> 📌 **Résumé mental** : en accès distant, les `AllowedIPs` côté serveur sont des **IP uniques** (`/32`, une par appareil). En site-à-site, elles sont des **sous-réseaux entiers** (`/24` et plus). Même outil, même syntaxe, périmètre différent. En entreprise, ce montage se fait souvent avec **IPSec** sur les routeurs — le concept est identique, seul l'outil change.
+
+### 3.9 OpenVPN : le vétéran (aperçu)
 
 WireGuard utilise des clés simples ; OpenVPN s'appuie sur une **PKI** (certificats signés par une CA — Leçon 4). Le principe :
 
@@ -238,25 +337,7 @@ make-cadir ~/pki-openvpn && cd ~/pki-openvpn
 
 Ensuite, un fichier `/etc/openvpn/server/server.conf` (gabarit dans `04-commandes-references.md`) puis `sudo openvpn --config client.ovpn` côté client. WireGuard fait la même chose en ~15 lignes et sans CA : c'est pourquoi il est devenu le choix par défaut — mais OpenVPN reste indispensable quand l'environnement (pare-feu, routeur d'entreprise) ne connaît que lui.
 
-### 3.9 Tunnels SSH : le couteau suisse ponctuel
-
-Pas d'installation, pas de config : SSH (Bloc 2) sait déjà créer des tunnels.
-
-```bash
-ssh -L 5433:localhost:5432 toto@mon-serveur
-# -L (local) : le port 5433 de MA machine pointe vers le port 5432 vu DEPUIS le serveur
-# → je rejoins une base privée avec : psql -h localhost -p 5433
-
-ssh -R 8080:localhost:3000 toto@mon-serveur
-# -R (remote) : le port 8080 DU SERVEUR pointe vers le 3000 de MA machine
-# → montrer une app de dev à quelqu'un qui n'a accès qu'au serveur
-
-ssh -D 1080 toto@mon-serveur
-# -D (dynamic) : proxy SOCKS local sur le port 1080 ;
-# le navigateur configuré dessus fait tout passer par le serveur
-```
-
-> 📌 **Quand préférer SSH à un VPN ?** Pour **un port précis, une session** (ex. lire une base) : SSH suffit. Pour **un réseau entier ou plusieurs services** : monte le VPN.
+> 🧭 **Et les tunnels SSH (`-L`, `-R`, `-D`), le reverse SSH tunnel et Cloudflare Tunnel ?** Ils méritent leur propre leçon, car ils répondent à un besoin **différent** du VPN : pas « relier un réseau », mais « atteindre **un** port ou exposer **un** service, le temps d'une session ». C'est toute la **Leçon 5b** — ton prochain arrêt.
 
 ---
 
@@ -303,19 +384,21 @@ ssh -D 1080 toto@mon-serveur
 ## 8. Checklist de validation
 
 - [ ] J'explique ce qu'est un VPN et je cite 3 usages quotidiens.
+- [ ] Je **distingue VPN d'accès distant et VPN site-à-site**, et je sais que l'un relie une machine à un réseau, l'autre deux réseaux entiers.
 - [ ] Je génère une paire de clés WireGuard et je sais qui possède quoi (privée = secrète, publique = partageable).
 - [ ] J'écris une config serveur et une config client avec des `AllowedIPs` cohérents.
 - [ ] Je démarre le tunnel, le rends persistant (`systemctl enable`) et le vérifie (`wg show`, `ping`).
 - [ ] Je choisis split vs full tunnel selon le besoin et j'en connais la conséquence.
-- [ ] Je crée un tunnel SSH local (`-L`) et je sais quand préférer SSH à un VPN.
+- [ ] J'explique la différence accès distant / site-à-site et je sais quels `AllowedIPs` écrire pour chacun.
+- [ ] Je sais quand préférer un tunnel SSH (Leçon 5b) à un VPN — et quand c'est l'inverse.
 - [ ] Je situe WireGuard vs OpenVPN (quand utiliser l'un ou l'autre).
 - [ ] Aucune clé dans Git, permissions 600, pare-feu n'exposant que le port VPN.
 
 ---
 
-🧭 **Pont vers la suite** — Tu sais maintenant **joindre des machines en privé** (tunnel VPN) et **chiffrer des sessions web** (TLS, Leçon 4). Mais quand plusieurs services cohabitent (front **Angular**, backend **Spring Boot**), on ne veut pas exposer chaque port au public : on place **un seul point d'entrée** devant — le **reverse proxy** — capable aussi de **répartir la charge** entre serveurs. C'est la Leçon 6.
+🧭 **Pont vers la suite (Leçon 5b)** — Tu sais maintenant **relier durablement une machine ou un réseau entier** en privé (VPN). Mais il y a l'autre besoin, plus **ponctuel** : joindre **un seul port** (lire une base 5 minutes), montrer une app locale à un collègue, ou exposer un service **sans ouvrir de port** (NAT, rappel §2.2). Pour cela, pas besoin d'un VPN : des **tunnels** plus légers — SSH (`-L`, `-R`, `-D`), reverse SSH tunnel, Cloudflare Tunnel. C'est toute la Leçon 5b.
 
 ---
 
-*Prochaine étape :* Leçon 6 — **Reverse Proxy et Load Balancing** dans `06-Reverse-Proxy-et-Load-Balancing`.
+*Prochaine étape :* Leçon 5b — **Tunnels et exposition de services (SSH, reverse, Cloudflare Tunnel)** dans `05b-Tunnels-et-exposition-services/`.
 

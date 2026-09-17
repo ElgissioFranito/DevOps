@@ -188,8 +188,8 @@ echo | openssl s_client -connect example.com:443 2>/dev/null | openssl x509 -noo
 
 ---
 
-🧭 **Pont vers la suite** — Le trafic web est maintenant **chiffré** (HTTPS). Mais chiffrer une session web, ce n'est pas encore **relier deux réseaux en privé** : pour administrer une machine distante, joindre un service interne ou te protéger sur un Wi-Fi public, il faut un **tunnel VPN**. C'est la Leçon 5 (WireGuard & OpenVPN). Ensuite seulement, avec plusieurs services (front Angular, backend Spring Boot), on placera un **reverse proxy / load balancer** comme point d'entrée unique — c'est la Leçon 6.
+🧭 **Pont vers la suite** — Le trafic web est maintenant **chiffré** (HTTPS). Mais chiffrer une session web, ce n'est pas encore **relier deux réseaux en privé** : pour administrer une machine distante, joindre un service interne ou te protéger sur un Wi-Fi public, il faut un **tunnel VPN**. C'est la Leçon 5a (WireGuard & OpenVPN) ; les tunnels **ponctuels** (SSH, Cloudflare Tunnel) suivent en Leçon 5b. Ensuite seulement, avec plusieurs services (front Angular, backend Spring Boot), on placera un **reverse proxy / load balancer** comme point d'entrée unique — c'est la Leçon 6.
 
 ---
 
-*Prochaine étape :* Leçon 5 — **VPN et tunnels sécurisés (WireGuard & OpenVPN)** dans `05-VPN-et-tunnels-securises`.
+*Prochaine étape :* Leçon 5a — **VPN : accès privé à distance (WireGuard)** dans `05a-VPN-et-acces-prive` (puis Leçon 5b — tunnels ponctuels, dans `05b-Tunnels-et-exposition-services`).

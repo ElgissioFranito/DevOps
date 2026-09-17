@@ -150,7 +150,7 @@ Ces trois commandes sont le réflexe n°1 de tout DevOps. Elles te resserviront 
 |---|---|
 | **Protocole** | ensemble de règles pour que deux machines se comprennent |
 | **TCP** | transport fiable (connexion, accusés de réception) — web, SSH |
-| **UDP** | transport rapide sans garantie — DNS, VPN (Leçon 5) |
+| **UDP** | transport rapide sans garantie — DNS, VPN (Leçon 5a) |
 | **Port** | numéro (1-65535) désignant le « guichet » d'un service sur une machine |
 | **HTTP / HTTPS** | protocole du web / sa version chiffrée (Leçon 4) |
 | **DNS** | l'annuaire : transforme un nom (`exemple.com`) en adresse IP |

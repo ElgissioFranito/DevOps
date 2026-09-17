@@ -58,4 +58,4 @@ openssl s_client -connect example.com:443 -brief
 
 - En prod, utilise **Let's Encrypt / certbot** (renouvellement auto, 90 jours).
 - La clé privée **ne se commit jamais** (Bloc 6 reviendra sur les secrets).
-- En Leçon 6, tu verras où placer ce certificat (chiffrement terminé au niveau du reverse proxy) ; en Leçon 5, tu verras le VPN, qui chiffre lui aussi — mais tout le trafic, pas seulement le web.
+- En Leçon 6, tu verras où placer ce certificat (chiffrement terminé au niveau du reverse proxy) ; en Leçon 5a, tu verras le VPN, qui chiffre lui aussi — mais tout le trafic, pas seulement le web (et en Leçon 5b, les tunnels ponctuels).

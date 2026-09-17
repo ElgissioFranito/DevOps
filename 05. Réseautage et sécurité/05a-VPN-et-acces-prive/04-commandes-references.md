@@ -1,6 +1,6 @@
-# Référence rapide — Leçon 5 : VPN & tunnels sécurisés
+# Référence rapide — Leçon 5a : VPN (WireGuard)
 
-> Bloc 5 · Leçon 5 — Aide-mémoire.
+> Bloc 5 · Leçon 5a — Aide-mémoire. Les commandes des **tunnels SSH et Cloudflare Tunnel** sont dans la fiche de la **Leçon 5b**.
 
 ---
 
@@ -48,14 +48,6 @@ PersistentKeepalive = 25       # maintient le tunnel derrière une box/NAT
 sudo ufw allow 51820/udp                     # n'ouvrir QUE le port du VPN
 sudo ufw allow in on wg0 to any port 22 proto tcp  # SSH accessible SEULEMENT via le tunnel
 sudo ufw status verbose                      # vérifier
-```
-
-## 🧰 Tunnels SSH (ponctuel)
-
-```bash
-ssh -L 5433:localhost:5432 toto@serveur  # -L local : mon 5433 → le 5432 vu depuis le serveur
-ssh -R 8080:localhost:3000 toto@serveur  # -R remote : le 8080 du serveur → mon 3000
-ssh -D 1080 toto@serveur                 # -D dynamic : proxy SOCKS local sur 1080
 ```
 
 ## 🔍 Diagnostic rapide
